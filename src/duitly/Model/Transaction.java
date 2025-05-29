@@ -1,52 +1,73 @@
 package duitly.Model;
+
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDate;;
 
 public class Transaction {
     private int id;
-   private String description;
-   private BigDecimal amount;
-   private LocalDate date;
-   private String type;
-   private int categoryId;
-   private int accountId; 
-   
-   public Transaction(int id, String description, BigDecimal amount, LocalDate date, String type, int categoryId, int accountId) {
-       this.id = id;
-       this.description = description;
-       this.amount = amount;
-       this.date = date;
-       this.type = type;
-       this.categoryId = categoryId;
-       this.accountId = accountId;
-   }
-   
-   public int getId() {
-       return this.id;
-   }
+    private int userId;
+    private TransactionType type;
+    private BigDecimal amount;
+    private String description;
+    private LocalDate date;
+    private Timestamp created_at;
+    private int categoryId;
 
-   public String getDescription() {
-       return this.description;
-   }
+    public Transaction(int id, int userId, TransactionType type, BigDecimal amount, String description, LocalDate date,
+            int categoryId, Timestamp created_at) {
+        this.id = id;
+        this.description = description;
+        this.amount = amount;
+        this.date = date;
+        this.type = type;
+        this.categoryId = categoryId;
+        this.userId = userId;
+        this.created_at = created_at;
+    }
 
-   public BigDecimal getAmount() {
-       return this.amount;
-   }
 
-   public LocalDate getDate() {
-       return this.date;
-   }
+	public int getId() {
+        return this.id;
+    }
 
-   public String getType() {
-       return this.type;
-   }
+    public String getDescription() {
+        return this.description;
+    }
 
-   public int getCategoryId() {
-       return this.categoryId;
-   }
+    public BigDecimal getAmount() {
+        return this.amount;
+    }
 
-   public int getAccountId() {
-       return this.accountId;
-  
+    public LocalDate getDate() {
+        return this.date;
+    }
+
+    public TransactionType getType() {
+        return this.type;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public Timestamp getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(Timestamp created_at) {
+        this.created_at = created_at;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 }
