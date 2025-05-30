@@ -1,4 +1,4 @@
-package duitly.Database;
+package duitly.database;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import java.sql.Connection;

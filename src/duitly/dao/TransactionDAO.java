@@ -1,8 +1,8 @@
-package duitly.DAO;
+package duitly.dao;
 
-import duitly.Database.DBConnectionManager;
-import duitly.Model.Transaction;
-import duitly.Model.TransactionType;
+import duitly.database.DBConnectionManager;
+import duitly.model.Transaction;
+import duitly.model.TransactionType;
 
 import java.math.BigDecimal;
 import java.sql.*;
@@ -25,12 +25,12 @@ public class TransactionDAO {
         }
     }
 
-    public void deleteTransaction(Transaction transaction) {
+    public void deleteTransaction(int transactionId) {
         String query = "DELETE FROM transactions WHERE id = ?";
         try (
                 Connection conn = DBConnectionManager.Connect();
                 PreparedStatement stmt = conn.prepareStatement(query);) {
-            stmt.setInt(1, transaction.getId());
+            stmt.setInt(1, transactionId);
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -79,5 +79,66 @@ public class TransactionDAO {
             e.printStackTrace();
         }
         return transactions;
+    }
+
+    public List<Transaction> getAllTransactionsByUserId(int userId) {
+        List<Transaction> transactions = new ArrayList<>();
+        String query = "SELECT * FROM transactions WHERE user_id = ?";
+        try (
+                Connection conn = DBConnectionManager.Connect();
+                PreparedStatement stmt = conn.prepareStatement(query);) {
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+
+                int id = rs.getInt("id");
+                String description = rs.getString("description");
+                BigDecimal amount = rs.getBigDecimal("amount");
+                LocalDate date = rs.getDate("date").toLocalDate();
+                int categoryId = rs.getInt("categiry_id");
+                TransactionType type = TransactionType.valueOf(rs.getString("type"));
+                Timestamp created_at = rs.getTimestamp("created_at");
+
+                Transaction transaction = new Transaction(id, userId, type, amount, description, date, categoryId,
+                        created_at);
+                transactions.add(transaction);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return transactions;
+    }
+
+
+    public Transaction getTransactionById(int transactionId) {
+        String query = "SELECT * FROM transactions WHERE id = ?";
+        try (
+                Connection conn = DBConnectionManager.Connect();
+                PreparedStatement stmt = conn.prepareStatement(query);) {
+            stmt.setInt(1, transactionId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+
+                int id = rs.getInt("id");
+                int userId = rs.getInt("user_id");
+                String description = rs.getString("description");
+                BigDecimal amount = rs.getBigDecimal("amount");
+                LocalDate date = rs.getDate("date").toLocalDate();
+                int categoryId = rs.getInt("categiry_id");
+                TransactionType type = TransactionType.valueOf(rs.getString("type"));
+                Timestamp created_at = rs.getTimestamp("created_at");
+
+                Transaction transaction = new Transaction(id, userId, type, amount, description, date, categoryId,
+                        created_at);
+                return transaction;
+            }
+            return null;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
     }
 }

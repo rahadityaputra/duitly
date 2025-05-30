@@ -1,4 +1,4 @@
-package duitly.DAO;
+package duitly.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import duitly.Database.DBConnectionManager;
-import duitly.Model.User;
+import duitly.database.DBConnectionManager;
+import duitly.model.User;
 
 public class UserDAO {
 
