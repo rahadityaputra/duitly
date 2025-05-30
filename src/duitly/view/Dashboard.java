@@ -1,4 +1,4 @@
-package duitly.View;
+package duitly.view;
 
 import java.awt.*;
 import javax.swing.*;

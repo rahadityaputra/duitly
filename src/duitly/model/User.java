@@ -1,4 +1,4 @@
-package duitly.Model;
+package duitly.model;
 
 import java.math.BigDecimal;
 

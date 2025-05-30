@@ -1,7 +1,7 @@
-package duitly.Controller;
+package duitly.controller;
 
-import duitly.DAO.UserDAO;
-import duitly.Model.User;
+import duitly.model.User;
+import duitly.dao.UserDAO;
 
 public class UserController {
     private User currentUser;
@@ -35,7 +35,7 @@ public class UserController {
                 System.out.println("Registration failed: Username already exists.");
             }
         } catch (Exception e) {
-            System.err.println("Registration error: " + e.getMessage());
+            throw e;
         }
     }
 

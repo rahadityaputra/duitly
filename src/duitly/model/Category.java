@@ -1,25 +1,32 @@
-package duitly.Model;
+package duitly.model;
 
 public class Category {
     private int id;
+    private int userId;
     private String name;
     private String description;
-    private String type;
+    private TransactionType type;
 
-    public Category() {
-    }
-
-    public Category(String name, String description, String type) {
-        this.name = name;
-        this.description = description;
-        this.type = type;
-    }
-
-    public Category(int id, String name, String description, String type) {
+    public Category(int id, int userId, String name, String description, TransactionType type) {
         this.id = id;
+        this.userId = userId;
         this.name = name;
         this.description = description;
         this.type = type;
+    }
+
+    public Category(String name, String description, TransactionType type) {
+        this.name = name;
+        this.description = description;
+        this.type = type;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public int getId() {
@@ -34,7 +41,7 @@ public class Category {
         return this.description;
     }
 
-    public String getType() {
+    public TransactionType getType() {
         return this.type;
     }
 
@@ -50,7 +57,7 @@ public class Category {
         this.description = description;
     }
 
-    public void setType(String type) {
+    public void setType(TransactionType type) {
         this.type = type;
     }
 }
