@@ -8,14 +8,14 @@ package duitly.view;
  *
  * @author arkankhalifamusta
  */
-public class Tambah extends javax.swing.JFrame {
+public class EditTransaksi extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Tambah.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(EditTransaksi.class.getName());
 
     /**
      * Creates new form Dashboard
      */
-    public Tambah() {
+    public EditTransaksi() {
         initComponents();
     }
 
@@ -128,7 +128,7 @@ public class Tambah extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(244, 246, 248));
 
         jLabel2.setFont(new java.awt.Font("Helvetica", 1, 18)); // NOI18N
-        jLabel2.setText("Tambah Transaksi");
+        jLabel2.setText("Edit Transaksi");
 
         jLabel3.setFont(new java.awt.Font("Helvetica", 0, 16)); // NOI18N
         jLabel3.setText("Tanggal");
@@ -335,7 +335,7 @@ public class Tambah extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Tambah().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new EditTransaksi().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
