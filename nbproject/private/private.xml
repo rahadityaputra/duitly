@@ -3,10 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/arkankhalifamusta/Desktop/rama/duitly/src/duitly/view/Login.java</file>
-            <file>file:/Users/arkankhalifamusta/Desktop/rama/duitly/src/duitly/view/Dashboard.java</file>
-            <file>file:/Users/arkankhalifamusta/Desktop/rama/duitly/src/duitly/view/DashboardManual.java</file>
-            <file>file:/Users/arkankhalifamusta/Desktop/rama/duitly/src/duitly/view/Daftar.java</file>
+            <file>file:/home/rahadityaputra/NetBeansProjects/Duitly/src/duitly/view/TransactionForm.java</file>
+            <file>file:/home/rahadityaputra/NetBeansProjects/Duitly/src/duitly/view/Dashboard.java</file>
+            <file>file:/home/rahadityaputra/NetBeansProjects/Duitly/src/duitly/view/Register.java</file>
+            <file>file:/home/rahadityaputra/NetBeansProjects/Duitly/src/duitly/view/Login.java</file>
+            <file>file:/home/rahadityaputra/NetBeansProjects/Duitly/src/duitly/view/Profil.java</file>
+            <file>file:/home/rahadityaputra/NetBeansProjects/Duitly/src/duitly/Duitly.java</file>
+            <file>file:/home/rahadityaputra/NetBeansProjects/Duitly/src/duitly/util/ErrorDialogSwing.java</file>
+            <file>file:/home/rahadityaputra/NetBeansProjects/Duitly/src/duitly/controller/MainController.java</file>
+            <file>file:/home/rahadityaputra/NetBeansProjects/Duitly/src/duitly/controller/UserController.java</file>
+            <file>file:/home/rahadityaputra/NetBeansProjects/Duitly/src/duitly/exception/UserException.java</file>
+            <file>file:/home/rahadityaputra/NetBeansProjects/Duitly/src/duitly/database/DBConnectionManager.java</file>
+            <file>file:/home/rahadityaputra/NetBeansProjects/Duitly/src/duitly/dao/UserDAO.java</file>
+            <file>file:/home/rahadityaputra/NetBeansProjects/Duitly/src/duitly/model/User.java</file>
         </group>
     </open-files>
 </project-private>

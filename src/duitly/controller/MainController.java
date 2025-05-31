@@ -1,5 +1,6 @@
 package duitly.controller;
 
+import duitly.exception.UserException;
 import duitly.model.Category;
 import duitly.model.Transaction;
 import duitly.model.User;
@@ -15,24 +16,36 @@ public class MainController {
         this.userController = new UserController();
     }
 
-    public boolean login(String username, String password) {
-        userController.login(username, password);
-        User user = userController.getCurrentUser();
-        if (user != null) {
-            this.transactionController = new TransactionController(user);
-            this.categoryController = new CategoryController(user);
-            return true;
+    public void login(String username, String password) {
+        try {
+            userController.login(username, password);
+            User user = userController.getCurrentUser();
+            if (user != null) {
+                this.transactionController = new TransactionController(user);
+                this.categoryController = new CategoryController(user);
+            }
+            throw new UserException("user not registered");
+        } catch (UserException e) {
+            throw e;
         }
-        return false;
+        
     }
 
     public void register(String username, String password, String fullname, String email) {
-        userController.register(username, password, fullname, email);
+        try {
+            userController.register(username, password, fullname, email);
+        } catch (UserException e) {
+            throw e;
+        }
     }
 
     public void logout() {
-        userController.logout();
-        this.transactionController = null;
+        try {
+            userController.logout();
+            this.transactionController = null;
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     public User getCurrentUser() {
@@ -40,20 +53,34 @@ public class MainController {
     }
 
     public void addTransaction(Transaction transaction) {
-        if (transactionController != null) {
+        try {
+            if (transactionController != null) {
             transactionController.addTransaction(transaction);
+        }
+        } catch (Exception e) {
+            throw e;
         }
     }
 
     public void updateTransaction(Transaction transaction) {
-        if (transactionController != null) {
-            transactionController.updateTransaction(transaction);
+        try {
+            if (transactionController != null) {
+                transactionController.updateTransaction(transaction);
+            }
+        } catch (Exception e) {
+            throw e;
         }
+        
     }
 
     public void deleteTransaction(int transactionId) {
-        if (transactionController != null) {
-            transactionController.deleteTransaction(transactionId);
+        try {
+            if (transactionController != null) {
+                transactionController.deleteTransaction(transactionId);
+            }
+            
+        } catch (Exception e) {
+            throw e;
         }
     }
 
@@ -72,20 +99,35 @@ public class MainController {
     }
 
     public void addCategory(Category category) {
-        if (categoryController != null) {
-            categoryController.addCategory(category);
+        try {
+            if (categoryController != null) {
+                categoryController.addCategory(category);
+            }
+            
+        } catch (Exception e) {
+            throw e;
         }
     }
 
     public void updateCategory(Category category) {
-        if (categoryController != null) {
-            categoryController.updateCategory(category);
+        try {
+            if (categoryController != null) {
+                categoryController.updateCategory(category);
+            }
+            
+        } catch (Exception e) {
+            throw e;
         }
     }
 
     public void deleteCategory(int id) {
-        if (categoryController != null) {
-            categoryController.deleteCategory(id);
+        try {
+            if (categoryController != null) {
+                categoryController.deleteCategory(id);
+            }
+            
+        } catch (Exception e) {
+            throw e;
         }
     }
 }

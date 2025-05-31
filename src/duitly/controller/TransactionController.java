@@ -1,6 +1,7 @@
 package duitly.controller;
 
 import duitly.dao.TransactionDAO;
+import duitly.exception.UserException;
 import duitly.model.Transaction;
 import duitly.model.User;
 
@@ -20,7 +21,7 @@ public class TransactionController {
             transaction.setUserId(currentUser.getId());
             transactionDAO.insertTransaction(transaction);
         } else {
-            System.out.println("Tidak ada user yang login.");
+            throw new UserException("User not found");
         }
     }
 
@@ -28,12 +29,16 @@ public class TransactionController {
         if (currentUser != null && transaction.getUserId() == currentUser.getId()) {
             transactionDAO.updateTransaction(transaction);
         } else {
-            System.out.println("Akses ditolak atau belum login.");
+            throw new UserException("User not found");
         }
     }
 
     public void deleteTransaction(int transactionId) {
-        transactionDAO.deleteTransaction(transactionId);
+        if (currentUser != null && transactionId == currentUser.getId()) {
+            transactionDAO.deleteTransaction(transactionId);
+        } else {
+            throw new UserException("User not found");
+        }
     }
 
     public List<Transaction> getAllTransactions() {
