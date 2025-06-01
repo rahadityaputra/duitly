@@ -4,6 +4,8 @@
  */
 package duitly.view;
 
+import duitly.controller.MainController;
+import duitly.model.User;
 import javax.swing.JFrame;
 
 /**
@@ -11,18 +13,29 @@ import javax.swing.JFrame;
  * @author arkankhalifamusta
  */
 public class Dashboard extends javax.swing.JFrame {
-    
+    private MainController mainController;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Dashboard.class.getName());
 
     /**
      * Creates new form Dashboard
+     * 
      */
-    public Dashboard() {
+    public Dashboard(MainController mainController) {
+        this.mainController = mainController;
         initComponents();
+        sayHello();
         setExtendedState(JFrame.MAXIMIZED_HORIZ);
         setVisible(true);
         setResizable(false);
     }
+    
+    
+    private void sayHello() {
+        User user = mainController.getCurrentUser();
+        jLabel1.setText(user.getUsername());
+    }
+    
+    private void 
 
     /**
      * This method is called from within the constructor to initialize the form.

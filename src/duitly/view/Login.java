@@ -5,6 +5,7 @@
 package duitly.view;
 
 import duitly.controller.MainController;
+import duitly.model.User;
 import duitly.util.ErrorDialogSwing;
 
 /**
@@ -205,7 +206,7 @@ public class Login extends javax.swing.JFrame {
             String password = jPasswordField1.getText();
             MainController mainController = new MainController();
             mainController.login(username, password);
-            new Dashboard();
+            new Dashboard(mainController);
             this.dispose();
         } catch (Exception e) {
             ErrorDialogSwing.showError("Login failed", e.getLocalizedMessage());

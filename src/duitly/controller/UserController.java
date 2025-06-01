@@ -42,6 +42,7 @@ public class UserController {
     }
 
     public User getCurrentUser() {
+        String name = this.currentUser.getFullname();
         return this.currentUser;
     }
 

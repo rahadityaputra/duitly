@@ -4,6 +4,7 @@ import duitly.dao.TransactionDAO;
 import duitly.exception.UserException;
 import duitly.model.Transaction;
 import duitly.model.User;
+import java.math.BigDecimal;
 
 import java.util.List;
 
@@ -53,4 +54,14 @@ public class TransactionController {
     public Transaction getTransactionById(int id) {
         return transactionDAO.getTransactionById(id);
     }
+    
+    public BigDecimal getMonthlyIncome() {
+        return transactionDAO.getIncomeThisMonth(currentUser.getId());
+    }
+
+    public BigDecimal getMonthlyExpense() {
+        return transactionDAO.getExpenseThisMonth(currentUser.getId());
+    }
+    
+
 }

@@ -1,9 +1,11 @@
 package duitly.controller;
 
+import duitly.dto.DashboardSummary;
 import duitly.exception.UserException;
 import duitly.model.Category;
 import duitly.model.Transaction;
 import duitly.model.User;
+import java.math.BigDecimal;
 
 import java.util.List;
 
@@ -23,8 +25,9 @@ public class MainController {
             if (user != null) {
                 this.transactionController = new TransactionController(user);
                 this.categoryController = new CategoryController(user);
+            } else {
+                throw new UserException("user not registered");
             }
-            throw new UserException("user not registered");
         } catch (UserException e) {
             throw e;
         }
@@ -89,6 +92,14 @@ public class MainController {
             return transactionController.getAllTransactions();
         }
         return null;
+    }
+    
+    
+    public DashboardSummary getDashboardSummary() {
+        BigDecimal income = transactionController.getMonthlyIncome();
+        BigDecimal expense = transactionController.getMonthlyExpense();
+        DashboardSummary dashboardSummary = new DashboardSummary(income, expense);
+        return dashboardSummary;
     }
 
     public List<Category> getAllCategories() {

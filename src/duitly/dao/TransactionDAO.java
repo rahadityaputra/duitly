@@ -18,10 +18,10 @@ public class TransactionDAO {
                 PreparedStatement stmt = conn.prepareStatement(query);) {
             stmt.setString(1, transaction.getDescription());
             stmt.setBigDecimal(2, transaction.getAmount());
-            stmt.setDate(3, Date.valueOf(transaction.getDate())); // assuming date is LocalDate
+            stmt.setDate(3, Date.valueOf(transaction.getDate())); 
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getLocalizedMessage());
         }
     }
 
@@ -33,7 +33,7 @@ public class TransactionDAO {
             stmt.setInt(1, transactionId);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+           System.out.println(e.getLocalizedMessage());
         }
     }
 
@@ -48,7 +48,7 @@ public class TransactionDAO {
             stmt.setInt(4, transaction.getId());
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+           System.out.println(e.getLocalizedMessage());
         }
     }
 
@@ -76,7 +76,7 @@ public class TransactionDAO {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getLocalizedMessage());
         }
         return transactions;
     }
@@ -105,7 +105,7 @@ public class TransactionDAO {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getLocalizedMessage());
         }
         return transactions;
     }
@@ -136,9 +136,57 @@ public class TransactionDAO {
             return null;
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getLocalizedMessage());
             return null;
         }
 
+    }
+    
+    public BigDecimal getIncomeThisMonth(int userId) {
+        String query = """
+            SELECT COALESCE(SUM(amount), 0)
+            FROM transactions
+            WHERE type = 'INCOME'
+            AND MONTH(date) = MONTH(CURRENT_DATE())
+            AND YEAR(date) = YEAR(CURRENT_DATE())
+            AND user_id = ?
+        """;
+
+        try (    Connection conn = DBConnectionManager.Connect();
+                PreparedStatement stmt = conn.prepareStatement(query);) {
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getBigDecimal(1);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getLocalizedMessage());
+        }
+
+         return BigDecimal.ZERO;
+    }
+    
+    public BigDecimal getExpenseThisMonth(int userId) {
+        String query = """
+            SELECT COALESCE(SUM(amount), 0)
+            FROM transactions
+            WHERE type = 'EXPENSE'
+            AND MONTH(date) = MONTH(CURRENT_DATE())
+            AND YEAR(date) = YEAR(CURRENT_DATE())
+            AND user_id = ?
+        """;
+
+        try (    Connection conn = DBConnectionManager.Connect();
+                PreparedStatement stmt = conn.prepareStatement(query);) {
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getBigDecimal(1);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getLocalizedMessage());
+        }
+
+         return BigDecimal.ZERO;
     }
 }
