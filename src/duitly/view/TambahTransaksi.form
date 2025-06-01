@@ -298,7 +298,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Helvetica" size="18" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Edit Transaction"/>
+                <Property name="text" type="java.lang.String" value="Add Transaction"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
@@ -331,8 +331,8 @@
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="2">
-                    <StringItem index="0" value="Pemasukan"/>
-                    <StringItem index="1" value="Pengeluaran"/>
+                    <StringItem index="0" value="Income"/>
+                    <StringItem index="1" value="Expense"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -387,7 +387,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Helvetica" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Save"/>
+                <Property name="text" type="java.lang.String" value="Add"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="jButton7">
