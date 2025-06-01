@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 19, 2025 at 03:26 PM
+-- Generation Time: Jun 01, 2025 at 02:29 PM
 -- Server version: 10.11.11-MariaDB-0ubuntu0.24.04.2
 -- PHP Version: 8.3.6
 
@@ -24,19 +24,49 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `type` enum('income','expense') NOT NULL,
+  `description` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `user_id`, `name`, `type`, `description`, `created_at`, `updated_at`) VALUES
+(1, 2, 'beli', 'expense', 'fsdfsd', '2025-06-01 14:06:48', '2025-06-01 14:06:48');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `transactions`
 --
 
 CREATE TABLE `transactions` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `type` enum('income','expense') NOT NULL,
-  `amount` double NOT NULL,
-  `category` varchar(100) DEFAULT NULL,
+  `type` enum('INCOME','EXPENSE') NOT NULL,
+  `amount` decimal(12,2) DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `date` date NOT NULL,
-  `created_at` timestamp NULL DEFAULT current_timestamp()
+  `date` date NOT NULL DEFAULT current_timestamp(),
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `category_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `transactions`
+--
+
+INSERT INTO `transactions` (`id`, `user_id`, `type`, `amount`, `description`, `date`, `created_at`, `category_id`) VALUES
+(2, 2, 'EXPENSE', 100000.00, 'fsdfsdfd', '2025-06-01', '2025-06-01 14:22:19', 1);
 
 -- --------------------------------------------------------
 
@@ -54,15 +84,31 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `fullname`, `created_at`, `email`) VALUES
+(1, '', '', '', '2025-05-31 10:19:05', ''),
+(2, 'adit1234', 'rumah1234', 'rahadit@gadfsd.com', '2025-05-31 10:21:23', 'rahaditya');
+
+--
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_user_category` (`user_id`);
 
 --
 -- Indexes for table `transactions`
 --
 ALTER TABLE `transactions`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `fk_user_transaction` (`user_id`),
+  ADD KEY `fk_category_transaction` (`category_id`);
 
 --
 -- Indexes for table `users`
@@ -77,26 +123,39 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
 --
 
 --
+-- Constraints for table `categories`
+--
+ALTER TABLE `categories`
+  ADD CONSTRAINT `fk_user_category` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
 -- Constraints for table `transactions`
 --
 ALTER TABLE `transactions`
-  ADD CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `fk_category_transaction` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`),
+  ADD CONSTRAINT `fk_user_transaction` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
