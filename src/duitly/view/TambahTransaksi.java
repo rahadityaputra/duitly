@@ -10,14 +10,14 @@ import javax.swing.JFrame;
  *
  * @author arkankhalifamusta
  */
-public class EditTransaksi extends javax.swing.JFrame {
+public class TambahTransaksi extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(EditTransaksi.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TambahTransaksi.class.getName());
 
     /**
      * Creates new form Dashboard
      */
-    public EditTransaksi() {
+    public TambahTransaksi() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_HORIZ);
         setVisible(true);
@@ -140,7 +140,7 @@ public class EditTransaksi extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Helvetica", 0, 16)); // NOI18N
         jLabel5.setText("Type");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Income", "Expense" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pemasukan", "Pengeluaran" }));
 
         jTextField1.setText("Rp ");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -327,7 +327,7 @@ public class EditTransaksi extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new EditTransaksi().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new TambahTransaksi().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
