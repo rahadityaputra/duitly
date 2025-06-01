@@ -6,7 +6,6 @@ package duitly.view;
 
 import duitly.controller.MainController;
 import duitly.dto.DashboardSummary;
-import duitly.model.Category;
 import duitly.model.Transaction;
 import duitly.model.User;
 import java.util.List;
@@ -39,7 +38,7 @@ public class Dashboard extends javax.swing.JFrame {
     // untuk ucapan halo ke user
     private void sayHello() {
         User user = mainController.getCurrentUser();
-        jLabel1.setText(user.getUsername());
+       jLabel1.setText("Hello " + user.getUsername());
     }
 
     // untuk menampilkan data summay transaksi milik user    
@@ -123,6 +122,11 @@ public class Dashboard extends javax.swing.JFrame {
         jButton3.setBackground(new java.awt.Color(255, 171, 46));
         jButton3.setFont(new java.awt.Font("Helvetica", 1, 13)); // NOI18N
         jButton3.setText("Profile");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
 
         jButton4.setBackground(new java.awt.Color(255, 171, 46));
         jButton4.setFont(new java.awt.Font("Helvetica", 1, 13)); // NOI18N
@@ -273,6 +277,12 @@ public class Dashboard extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        // TODO add your handling code here:
+        new Profile(mainController);
+        this.dispose();
+    }//GEN-LAST:event_jButton3MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

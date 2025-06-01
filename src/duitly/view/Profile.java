@@ -4,6 +4,8 @@
  */
 package duitly.view;
 
+import duitly.controller.MainController;
+import duitly.model.User;
 import javax.swing.JFrame;
 
 /**
@@ -13,15 +15,30 @@ import javax.swing.JFrame;
 public class Profile extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Profile.class.getName());
-
+    private final MainController mainController;
     /**
      * Creates new form Dashboard
      */
-    public Profile() {
+    public Profile(MainController mainController) {
+        this.mainController = mainController;
         initComponents();
+        sayHello();
+        showProfileData();
         setExtendedState(JFrame.MAXIMIZED_HORIZ);
         setVisible(true);
         setResizable(false);
+    }
+    
+    public void showProfileData() {
+        User currentUser = mainController.getCurrentUser();
+        
+        jLabel6.setText(currentUser.getUsername());
+        jLabel7.setText(currentUser.getFullname());
+        jLabel8.setText(currentUser.getEmail());
+    }
+     private void sayHello() {
+        User user = mainController.getCurrentUser();
+        jLabel1.setText("Hello " + user.getUsername());
     }
 
     /**
