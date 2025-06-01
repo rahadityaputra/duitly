@@ -5,6 +5,7 @@
 package duitly;
 
 import duitly.view.Login;
+import duitly.view.Dashboard;
 
 /**
  *
@@ -17,7 +18,8 @@ public class Duitly {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        new Login();
+        new Dashboard();
+//        new Login();
     }
     
 }
