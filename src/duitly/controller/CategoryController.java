@@ -1,6 +1,8 @@
 package duitly.controller;
 
 import duitly.dao.CategoryDAO;
+import duitly.exception.CategoryException;
+import duitly.exception.UserException;
 import duitly.model.Category;
 import duitly.model.User;
 
@@ -20,7 +22,7 @@ public class CategoryController {
             category.setUserId(currentUser.getId());
             categoryDAO.insertCategory(category);
         } else {
-            System.out.println("Tidak ada user yang login.");
+            throw new UserException("User not found");
         }
     }
 
@@ -29,7 +31,7 @@ public class CategoryController {
             category.setUserId(currentUser.getId());
             categoryDAO.updateCategory(category);
         } else {
-            System.out.println("Tidak ada user yang login.");
+            throw new UserException("User not found");
         }
     }
 
@@ -37,7 +39,7 @@ public class CategoryController {
         try {
             categoryDAO.deleteCategory(id);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to delete category: " + e.getMessage(), e);
+            throw new UserException("Failed to delete category: " + e.getMessage(), e);
         }
     }
 
@@ -45,7 +47,7 @@ public class CategoryController {
         try {
             return categoryDAO.getAllCategories();
         } catch (Exception e) {
-            throw new RuntimeException("Failed to retrieve categories: " + e.getMessage(), e);
+            throw new CategoryException("Failed to retrieve categories: " + e.getMessage(), e);
         }
     }
 
@@ -53,7 +55,7 @@ public class CategoryController {
         try {
             return categoryDAO.getCategoryById(id);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to get category: " + e.getMessage(), e);
+            throw new CategoryException("Failed to get category: " + e.getMessage(), e);
         }
     }
 }

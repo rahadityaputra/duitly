@@ -2,6 +2,7 @@ package duitly.controller;
 
 import duitly.model.User;
 import duitly.dao.UserDAO;
+import duitly.exception.UserException;
 
 public class UserController {
     private User currentUser;
@@ -16,11 +17,12 @@ public class UserController {
             boolean isUserRegistered = userDAO.checkUsernameExists(username);
             if (isUserRegistered) {
                 System.out.println("Login successful!");
+                currentUser = userDAO.getUser(username);
             } else {
-                System.out.println("Login failed: User not found.");
+                throw new RuntimeException("Login failed: User not found.");
             }
-        } catch (Exception e) {
-            System.err.println("Login error: " + e.getMessage());
+        } catch (RuntimeException e) {
+            throw e;
         }
     }
 
@@ -30,11 +32,11 @@ public class UserController {
             if (!isUserRegistered) {
                 User newUser = new User(username, password, fullname, email);
                 userDAO.saveUser(newUser);
-                System.out.println("Registration successful.");
+                currentUser = newUser;
             } else {
-                System.out.println("Registration failed: Username already exists.");
+                throw new UserException("Register failed: User already exists.");
             }
-        } catch (Exception e) {
+        } catch (UserException e) {
             throw e;
         }
     }
