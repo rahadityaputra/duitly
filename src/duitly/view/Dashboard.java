@@ -5,37 +5,72 @@
 package duitly.view;
 
 import duitly.controller.MainController;
+import duitly.dto.DashboardSummary;
+import duitly.model.Category;
+import duitly.model.Transaction;
 import duitly.model.User;
+import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author arkankhalifamusta
  */
 public class Dashboard extends javax.swing.JFrame {
-    private MainController mainController;
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Dashboard.class.getName());
-
+    private final MainController mainController;
     /**
      * Creates new form Dashboard
      * 
+     * @param mainController
      */
     public Dashboard(MainController mainController) {
         this.mainController = mainController;
         initComponents();
         sayHello();
+        showDashboardSummary();
+        showTableTodayTransaction();
         setExtendedState(JFrame.MAXIMIZED_HORIZ);
         setVisible(true);
         setResizable(false);
     }
     
     
+    // untuk ucapan halo ke user
     private void sayHello() {
         User user = mainController.getCurrentUser();
         jLabel1.setText(user.getUsername());
     }
+
+    // untuk menampilkan data summay transaksi milik user    
+    private void showDashboardSummary() {
+        DashboardSummary dashboardSummary = mainController.getDashboardSummary();
+        jLabel6.setText("Rp. " + dashboardSummary.getIncome());
+        jLabel7.setText("Rp. " + dashboardSummary.getExpense());
+        jLabel8.setText("Rp. " + dashboardSummary.getBalance());
+        
+    }
     
-    private void 
+    // untuk menampilkan table transaksi pada hari ini
+    
+    private void showTableTodayTransaction() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.setColumnIdentifiers(new String[]{"ID", "Name", "Amount", "Type", "Time"});
+        
+        List<Transaction> todayTransactions = mainController.getTodayTransactions();
+        for (Transaction transaction : todayTransactions) {
+        model.addRow(new Object[]{
+            transaction.getId(),
+            transaction.getCategoryName(),
+            transaction.getAmount().toString(),
+            transaction.getType().toString(),
+            transaction.getCreated_at().toLocalDateTime()
+        });
+        
+        }
+        
+        jTable1.setModel(model);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -142,13 +177,10 @@ public class Dashboard extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -160,12 +192,14 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(48, 48, 48)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(190, 190, 190)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
@@ -229,7 +263,7 @@ public class Dashboard extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1188, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1188, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

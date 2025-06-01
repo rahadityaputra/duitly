@@ -18,8 +18,8 @@ public class Duitly {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        new Dashboard();
-//        new Login();
+        //new Dashboa();
+        new Login();
     }
     
 }

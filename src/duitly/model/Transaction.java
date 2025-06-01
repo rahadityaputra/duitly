@@ -10,18 +10,20 @@ public class Transaction {
     private TransactionType type;
     private BigDecimal amount;
     private String description;
+    private String categoryName;
     private LocalDate date;
     private Timestamp created_at;
     private int categoryId;
 
     public Transaction(int id, int userId, TransactionType type, BigDecimal amount, String description, LocalDate date,
-            int categoryId, Timestamp created_at) {
+            int categoryId, String categoryName, Timestamp created_at) {
         this.id = id;
         this.description = description;
         this.amount = amount;
         this.date = date;
         this.type = type;
         this.categoryId = categoryId;
+        this.categoryName = categoryName;
         this.userId = userId;
         this.created_at = created_at;
     }
@@ -69,5 +71,13 @@ public class Transaction {
 
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
+    }
+    
+     public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 }

@@ -54,7 +54,11 @@ public class TransactionDAO {
 
     public List<Transaction> getAllTransaction() {
         List<Transaction> transactions = new ArrayList<>();
-        String query = "SELECT * FROM transactions";
+        String query = """
+        SELECT t.*, c.name AS category_name 
+        FROM transactions t
+        JOIN categories c ON t.category_id = c.id
+    """;
         try (
                 Connection conn = DBConnectionManager.Connect();
                 PreparedStatement stmt = conn.prepareStatement(query);) {
@@ -66,11 +70,12 @@ public class TransactionDAO {
                 BigDecimal amount = rs.getBigDecimal("amount");
                 LocalDate date = rs.getDate("date").toLocalDate();
                 int categoryId = rs.getInt("categiry_id");
+                String categoryName = rs.getString("category_name");
                 int userId = rs.getInt("user_id");
                 TransactionType type = TransactionType.valueOf(rs.getString("type"));
                 Timestamp created_at = rs.getTimestamp("created_at");
 
-                Transaction transaction = new Transaction(id, userId, type, amount, description, date, categoryId,
+                Transaction transaction = new Transaction(id, userId, type, amount, description, date, categoryId, categoryName,
                         created_at);
                 transactions.add(transaction);
             }
@@ -83,7 +88,12 @@ public class TransactionDAO {
 
     public List<Transaction> getAllTransactionsByUserId(int userId) {
         List<Transaction> transactions = new ArrayList<>();
-        String query = "SELECT * FROM transactions WHERE user_id = ?";
+        String query = """
+        SELECT t.*, c.name AS category_name 
+        FROM transactions t
+        JOIN categories c ON t.category_id = c.id
+        WHERE c.user_id = ?
+    """;
         try (
                 Connection conn = DBConnectionManager.Connect();
                 PreparedStatement stmt = conn.prepareStatement(query);) {
@@ -96,10 +106,11 @@ public class TransactionDAO {
                 BigDecimal amount = rs.getBigDecimal("amount");
                 LocalDate date = rs.getDate("date").toLocalDate();
                 int categoryId = rs.getInt("categiry_id");
+                String categoryName = rs.getString("category_name");
                 TransactionType type = TransactionType.valueOf(rs.getString("type"));
                 Timestamp created_at = rs.getTimestamp("created_at");
 
-                Transaction transaction = new Transaction(id, userId, type, amount, description, date, categoryId,
+                Transaction transaction = new Transaction(id, userId, type, amount, description, date, categoryId, categoryName,
                         created_at);
                 transactions.add(transaction);
             }
@@ -112,7 +123,12 @@ public class TransactionDAO {
 
 
     public Transaction getTransactionById(int transactionId) {
-        String query = "SELECT * FROM transactions WHERE id = ?";
+        String query = """
+        SELECT t.*, c.name AS category_name 
+        FROM transactions t
+        JOIN categories c ON t.category_id = c.id
+        WHERE t.id = ?
+    """;
         try (
                 Connection conn = DBConnectionManager.Connect();
                 PreparedStatement stmt = conn.prepareStatement(query);) {
@@ -126,10 +142,11 @@ public class TransactionDAO {
                 BigDecimal amount = rs.getBigDecimal("amount");
                 LocalDate date = rs.getDate("date").toLocalDate();
                 int categoryId = rs.getInt("categiry_id");
+                String categoryName = rs.getString("category_name");
                 TransactionType type = TransactionType.valueOf(rs.getString("type"));
                 Timestamp created_at = rs.getTimestamp("created_at");
 
-                Transaction transaction = new Transaction(id, userId, type, amount, description, date, categoryId,
+                Transaction transaction = new Transaction(id, userId, type, amount, description, date, categoryId, categoryName,
                         created_at);
                 return transaction;
             }
@@ -189,4 +206,42 @@ public class TransactionDAO {
 
          return BigDecimal.ZERO;
     }
+    
+    public List<Transaction> getTransactionsToday(int userId) {
+        List<Transaction> transactions = new ArrayList<>();
+         String query = """
+        SELECT t.*, c.name AS category_name 
+        FROM transactions t
+        JOIN categories c ON t.category_id = c.id
+        WHERE DATE(t.date) = CURDATE() AND t.user_id = ?
+    """;
+
+        try ( Connection conn = DBConnectionManager.Connect();
+             PreparedStatement stmt = conn.prepareStatement(query);
+            ) {
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int categoryId = rs.getInt("category_id");
+                String categoryName = rs.getString("category_name");
+                String typeStr = rs.getString("type");
+                String description = rs.getString("description");
+                BigDecimal amount = rs.getBigDecimal("amount");
+                LocalDate date = rs.getDate("date").toLocalDate();
+                Timestamp createdAt = rs.getTimestamp("created_at");
+
+                TransactionType type = TransactionType.valueOf(typeStr);
+
+                Transaction transaction = new Transaction(id, userId, type, amount, description, date, categoryId,categoryName, createdAt);
+                transactions.add(transaction);
+            }
+
+        } catch (SQLException e) {
+           System.out.println(e.getLocalizedMessage());
+        }
+
+        return transactions;
+    }   
+
 }

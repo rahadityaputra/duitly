@@ -259,7 +259,7 @@ public class Register extends javax.swing.JFrame {
              try {
                 MainController mainController = new MainController();
                 mainController.register(username, password, fullname, email);  
-                new Dashboard();
+                new Dashboard(mainController);
                 this.dispose();
              } catch (Exception e) {
                  ErrorDialogSwing.showError("Register Failed", e.getLocalizedMessage());

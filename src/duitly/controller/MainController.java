@@ -93,7 +93,10 @@ public class MainController {
         }
         return null;
     }
-    
+        
+    public List<Transaction> getTodayTransactions() {
+        return transactionController.fetchTodayTransactions();
+    }
     
     public DashboardSummary getDashboardSummary() {
         BigDecimal income = transactionController.getMonthlyIncome();

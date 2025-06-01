@@ -63,5 +63,8 @@ public class TransactionController {
         return transactionDAO.getExpenseThisMonth(currentUser.getId());
     }
     
-
+    public List<Transaction> fetchTodayTransactions() {
+        return transactionDAO.getTransactionsToday(currentUser.getId());
+    }
+    
 }
