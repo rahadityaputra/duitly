@@ -129,7 +129,7 @@ public class TambahTransaksi extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(244, 246, 248));
 
         jLabel2.setFont(new java.awt.Font("Helvetica", 1, 18)); // NOI18N
-        jLabel2.setText("Edit Transaction");
+        jLabel2.setText("Add Transaction");
 
         jLabel3.setFont(new java.awt.Font("Helvetica", 0, 16)); // NOI18N
         jLabel3.setText("Date");
@@ -140,7 +140,7 @@ public class TambahTransaksi extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Helvetica", 0, 16)); // NOI18N
         jLabel5.setText("Type");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pemasukan", "Pengeluaran" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Income", "Expense" }));
 
         jTextField1.setText("Rp ");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -161,7 +161,7 @@ public class TambahTransaksi extends javax.swing.JFrame {
 
         jButton6.setBackground(new java.awt.Color(25, 135, 84));
         jButton6.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
-        jButton6.setText("Save");
+        jButton6.setText("Add");
 
         jButton7.setBackground(new java.awt.Color(220, 53, 69));
         jButton7.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
