@@ -75,32 +75,37 @@ public class Profile extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Helvetica", 0, 18)); // NOI18N
         jLabel2.setText("Username");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, 133, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, 133, -1));
 
         jLabel3.setFont(new java.awt.Font("Helvetica", 0, 18)); // NOI18N
         jLabel3.setText("Full name");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, 130, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, 130, -1));
 
         jLabel5.setFont(new java.awt.Font("Helvetica", 0, 18)); // NOI18N
         jLabel5.setText("Email");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, 107, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 380, 107, -1));
 
         jLabel6.setFont(new java.awt.Font("Helvetica", 0, 16)); // NOI18N
         jLabel6.setText("--");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, 107, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 180, 310, -1));
 
         jLabel7.setFont(new java.awt.Font("Helvetica", 0, 16)); // NOI18N
         jLabel7.setText("---");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 230, 360, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 290, 310, -1));
 
         jLabel8.setFont(new java.awt.Font("Helvetica", 0, 16)); // NOI18N
         jLabel8.setText("---");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 340, 230, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 410, 320, -1));
 
         jButton1.setBackground(new java.awt.Color(252, 185, 83));
         jButton1.setFont(new java.awt.Font("Helvetica", 1, 13)); // NOI18N
         jButton1.setText("Dashboard");
         jButton1.setBorderPainted(false);
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -148,6 +153,11 @@ public class Profile extends javax.swing.JFrame {
         jButton4.setFont(new java.awt.Font("Helvetica", 1, 13)); // NOI18N
         jButton4.setText("Logout");
         jButton4.setBorderPainted(false);
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -194,6 +204,18 @@ public class Profile extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        new Dashboard(mainController);
+        this.dispose();
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        // TODO add your handling code here:
+        new Login();
+        this.dispose();
+    }//GEN-LAST:event_jButton4MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
