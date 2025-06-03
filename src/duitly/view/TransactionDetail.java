@@ -47,13 +47,28 @@ public class TransactionDetail extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        IdLabel = new javax.swing.JLabel();
+        NameLabel = new javax.swing.JLabel();
+        CategoryLabel = new javax.swing.JLabel();
+        TypeLabel = new javax.swing.JLabel();
+        AmountLabel = new javax.swing.JLabel();
+        DescriptionLabel = new javax.swing.JLabel();
+        DateLabel = new javax.swing.JLabel();
+        TimeLabel = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -94,6 +109,18 @@ public class TransactionDetail extends javax.swing.JFrame {
         jButton3.setContentAreaFilled(false);
         jButton3.setBorderPainted(false);
 
+        jLabel3.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        jLabel3.setText("ID");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        jLabel4.setText("Name");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        jLabel5.setText("Category");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 240, -1, -1));
+
         jButton4.setBackground(new java.awt.Color(255, 171, 46));
         jButton4.setFont(new java.awt.Font("Helvetica", 1, 13)); // NOI18N
         jButton4.setText("Logout");
@@ -101,21 +128,6 @@ public class TransactionDetail extends javax.swing.JFrame {
         jButton4.setOpaque(false);
         jButton4.setContentAreaFilled(false);
         jButton4.setBorderPainted(false);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "ID", "Name", "Category", "Type", "Amount", "Description", "Date", "Time"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 70, 670, 430));
 
         jButton7.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
         jButton7.setText("Remove Transaction");
@@ -147,9 +159,65 @@ public class TransactionDetail extends javax.swing.JFrame {
         jLabel1.setText("Hello, Rahaditya!");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
 
+        jLabel6.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        jLabel6.setText("Type");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 310, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        jLabel7.setText("Amount");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 380, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        jLabel8.setText("Description");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 120, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        jLabel9.setText("Date");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 240, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        jLabel11.setText("Time");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 310, -1, -1));
+
         jLabel10.setFont(new java.awt.Font("Helvetica Rounded", 1, 20)); // NOI18N
         jLabel10.setText("Duitly");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 70, -1));
+
+        IdLabel.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        IdLabel.setText("jLabel12");
+        getContentPane().add(IdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, -1, -1));
+
+        NameLabel.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        NameLabel.setText("jLabel13");
+        getContentPane().add(NameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, -1, -1));
+
+        CategoryLabel.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        CategoryLabel.setText("jLabel14");
+        getContentPane().add(CategoryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, -1, -1));
+
+        TypeLabel.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        TypeLabel.setText("jLabel15");
+        getContentPane().add(TypeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 330, -1, -1));
+
+        AmountLabel.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        AmountLabel.setText("jLabel16");
+        getContentPane().add(AmountLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 400, -1, -1));
+
+        DescriptionLabel.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        DescriptionLabel.setText("jLabel17");
+        getContentPane().add(DescriptionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 140, -1, -1));
+
+        DateLabel.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        DateLabel.setText("jLabel18");
+        getContentPane().add(DateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 260, -1, -1));
+
+        TimeLabel.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        TimeLabel.setText("jLabel19");
+        getContentPane().add(TimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 330, -1, -1));
+
+        jLabel12.setFont(new java.awt.Font("Helvetica", 1, 20)); // NOI18N
+        jLabel12.setText("Transaction Detail");
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, 220, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Documents\\ngodong\\Pbo\\duitly\\JAR\\TransactionDetail.png")); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
@@ -202,6 +270,14 @@ public class TransactionDetail extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel AmountLabel;
+    private javax.swing.JLabel CategoryLabel;
+    private javax.swing.JLabel DateLabel;
+    private javax.swing.JLabel DescriptionLabel;
+    private javax.swing.JLabel IdLabel;
+    private javax.swing.JLabel NameLabel;
+    private javax.swing.JLabel TimeLabel;
+    private javax.swing.JLabel TypeLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -210,8 +286,15 @@ public class TransactionDetail extends javax.swing.JFrame {
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
 }
