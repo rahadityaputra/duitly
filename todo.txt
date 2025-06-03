@@ -1,5 +1,5 @@
--- tambah kategori
--- tambah transaksi
+-- tambah kategori #selesai
+-- tambah transaksi #selesai
 -- edit transaksi
 -- profil (nampilin doang) #selesai
 -- background buat halaman tambah transaksi mana ?

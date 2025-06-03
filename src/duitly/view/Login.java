@@ -142,7 +142,7 @@ public class Login extends javax.swing.JFrame {
             char[] passwordChars = jPasswordField1.getPassword();
             String password = new String(passwordChars);
             MainController mainController = new MainController();
-            mainController.login(username, password);
+            mainController.login("gusti", "rumah1234");
             new Dashboard(mainController); 
             this.dispose();
         } catch (Exception e) {

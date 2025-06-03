@@ -5,27 +5,60 @@
 package duitly.view;
 
 import duitly.controller.MainController;
+import duitly.model.Category;
+import duitly.model.Transaction;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.List;
 import javax.swing.JFrame;
 
 /**
  *
  * @author arkankhalifamusta
  */
-public class EditTransaksi extends javax.swing.JFrame {
+public class EditTransactionPage extends javax.swing.JFrame {
     private final MainController mainController;
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(EditTransaksi.class.getName());
+    private final Transaction transaction;
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(EditTransactionPage.class.getName());
 
     /**
      * Creates new form Dashboard
      */
-    public EditTransaksi(MainController mainController) {
+    public EditTransactionPage(MainController mainController, Transaction transaction) {
         this.mainController = mainController;
+        this.transaction = transaction;
+        
         initComponents();
+        showDataTransaction();
         setExtendedState(JFrame.MAXIMIZED_HORIZ);
         setVisible(true);
         setResizable(false);
     }
+    
+    private void showDataTransaction() {
+        jTextField1.setText(transaction.getAmount().toString());
+        jTextArea1.setText(transaction.getDescription());
+        jComboBox1.setSelectedItem(transaction.getType().name());
+        
+        showCategoriesChoices();
+        
+        jComboBox2.setSelectedItem(transaction.getCategoryName());
+    }
 
+    public void showCategoriesChoices() {
+         List<Category> categories = mainController.getAllCategoriesCurrentUser();
+//         DefaultComboBoxModel<Category> model = new DefaultComboBoxModel<>();
+         
+         jComboBox2.removeAllItems();
+         String selectedType = (String) jComboBox1.getSelectedItem();
+         for (Category category : categories) {
+             if (category.getType().name().equals(selectedType.toUpperCase())) {                 
+                 jComboBox2.addItem(category);
+             } 
+         }
+         
+         
+     }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,13 +70,11 @@ public class EditTransaksi extends javax.swing.JFrame {
 
         jComboBox2 = new javax.swing.JComboBox<>();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jCalendarPanel1 = new de.wannawork.jcalendar.JCalendarPanel();
         jTextField1 = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -64,20 +95,25 @@ public class EditTransaksi extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jComboBox2.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cash", "Bank", "E-Wallet" }));
-        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 140, -1, -1));
+        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, -1, -1));
 
         jComboBox1.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Income", "Expense" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 140, 110, -1));
-
-        jLabel3.setFont(new java.awt.Font("Helvetica", 0, 16)); // NOI18N
-        jLabel3.setText("Date");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, -1, -1));
+        jComboBox1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBox1MouseClicked(evt);
+            }
+        });
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 110, -1));
 
         jLabel6.setFont(new java.awt.Font("Helvetica", 0, 16)); // NOI18N
         jLabel6.setText("Category");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 120, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, -1, -1));
 
         jButton7.setBackground(new java.awt.Color(220, 53, 69));
         jButton7.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
@@ -95,7 +131,7 @@ public class EditTransaksi extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Helvetica", 0, 16)); // NOI18N
         jLabel4.setText("Amount");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 240, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Helvetica", 1, 20)); // NOI18N
         jLabel2.setText("Edit Transaction");
@@ -103,16 +139,14 @@ public class EditTransaksi extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Helvetica", 0, 16)); // NOI18N
         jLabel7.setText("Description");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 360, -1, -1));
-        getContentPane().add(jCalendarPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 120, -1, -1));
 
-        jTextField1.setText("Rp ");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 260, 160, -1));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, 160, -1));
 
         jButton6.setBackground(new java.awt.Color(25, 135, 84));
         jButton6.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
@@ -132,7 +166,7 @@ public class EditTransaksi extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 380, 290, 110));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 150, 290, 110));
 
         jButton8.setBackground(new java.awt.Color(255, 193, 7));
         jButton8.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
@@ -150,11 +184,16 @@ public class EditTransaksi extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Helvetica", 0, 16)); // NOI18N
         jLabel5.setText("Type");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 120, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, -1, -1));
 
         jButton9.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         jButton9.setText("Add Category");
-        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 180, 130, -1));
+        jButton9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton9MouseClicked(evt);
+            }
+        });
+        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 290, 130, -1));
         jButton9.setOpaque(false);
         jButton9.setContentAreaFilled(false);
         jButton9.setBorderPainted(false);
@@ -163,6 +202,11 @@ public class EditTransaksi extends javax.swing.JFrame {
         jButton4.setFont(new java.awt.Font("Helvetica", 1, 13)); // NOI18N
         jButton4.setText("Logout");
         jButton4.setBorderPainted(false);
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -177,6 +221,11 @@ public class EditTransaksi extends javax.swing.JFrame {
         jButton3.setFont(new java.awt.Font("Helvetica", 1, 13)); // NOI18N
         jButton3.setText("Profile");
         jButton3.setBorderPainted(false);
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 180, 35));
         jButton3.setOpaque(false);
         jButton3.setContentAreaFilled(false);
@@ -186,6 +235,11 @@ public class EditTransaksi extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Helvetica", 1, 13)); // NOI18N
         jButton2.setText("Transactions");
         jButton2.setBorderPainted(false);
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 180, 40));
         jButton2.setOpaque(false);
         jButton2.setContentAreaFilled(false);
@@ -195,6 +249,11 @@ public class EditTransaksi extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Helvetica", 1, 13)); // NOI18N
         jButton1.setText("Dashboard");
         jButton1.setBorderPainted(false);
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 180, 50));
         jButton1.setOpaque(false);
         jButton1.setContentAreaFilled(false);
@@ -240,6 +299,54 @@ public class EditTransaksi extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton7MouseClicked
 
+    private void jComboBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1MouseClicked
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+        showCategoriesChoices();
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
+        // TODO add your handling code here:
+        AddCategoryModal tambahkategori = new AddCategoryModal(this, true, mainController);
+        
+        // Menambahkan listener saat dialog ditutup
+        tambahkategori.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                showCategoriesChoices(); // ini method kamu untuk update data kategori
+            }
+        });
+        tambahkategori.setLocationRelativeTo(null);
+        tambahkategori.setVisible(true);
+    }//GEN-LAST:event_jButton9MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        new Dashboard(mainController);
+        dispose();
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+        new TransactionPage(mainController);
+        dispose();
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        // TODO add your handling code here:
+        new Profile(mainController);
+        dispose();
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        // TODO add your handling code here:
+        new Login();
+        dispose();
+    }//GEN-LAST:event_jButton4MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -274,13 +381,11 @@ public class EditTransaksi extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private de.wannawork.jcalendar.JCalendarPanel jCalendarPanel1;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<Category> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

@@ -12,13 +12,16 @@ import java.util.List;
 
 public class TransactionDAO {
     public void insertTransaction(Transaction transaction) {
-        String query = "INSERT INTO transactions (description, amount, date) VALUES (?, ?, ?)";
+        String query = "INSERT INTO transactions (user_id, category_id, type, amount, description) VALUES (?, ?, ?, ?, ?)";
         try (
                 Connection conn = DBConnectionManager.Connect();
                 PreparedStatement stmt = conn.prepareStatement(query);) {
-            stmt.setString(1, transaction.getDescription());
-            stmt.setBigDecimal(2, transaction.getAmount());
-            stmt.setDate(3, Date.valueOf(transaction.getDate())); 
+            
+            stmt.setInt(1, transaction.getUserId());
+            stmt.setInt(2, transaction.getCategoryId());
+            stmt.setString(3, transaction.getType().name());
+            stmt.setBigDecimal(4, transaction.getAmount());
+            stmt.setString(5, transaction.getDescription());
             stmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getLocalizedMessage());
@@ -38,14 +41,13 @@ public class TransactionDAO {
     }
 
     public void updateTransaction(Transaction transaction) {
-        String query = "UPDATE transactions SET description = ?, amount = ?, date = ? WHERE id = ?";
+        String query = "UPDATE transactions SET description = ?, amount = ? WHERE id = ?";
         try (
                 Connection conn = DBConnectionManager.Connect();
                 PreparedStatement stmt = conn.prepareStatement(query);) {
             stmt.setString(1, transaction.getDescription());
             stmt.setBigDecimal(2, transaction.getAmount());
-            stmt.setDate(3, Date.valueOf(transaction.getDate()));
-            stmt.setInt(4, transaction.getId());
+            stmt.setInt(3, transaction.getId());
             stmt.executeUpdate();
         } catch (SQLException e) {
            System.out.println(e.getLocalizedMessage());
@@ -102,7 +104,7 @@ public class TransactionDAO {
             while (rs.next()) {
 
                 int id = rs.getInt("id");
-                int categoryId = rs.getInt("categiry_id");
+                int categoryId = rs.getInt("category_id");
                 String categoryName = rs.getString("category_name");
                 TransactionType type = TransactionType.valueOf(rs.getString("type"));
                 BigDecimal amount = rs.getBigDecimal("amount");
@@ -135,7 +137,7 @@ public class TransactionDAO {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 int userId = rs.getInt("user_id");
-                int categoryId = rs.getInt("categiry_id");
+                int categoryId = rs.getInt("category_id");
                 String categoryName = rs.getString("category_name");
                 TransactionType type = TransactionType.valueOf(rs.getString("type"));
                 BigDecimal amount = rs.getBigDecimal("amount");
@@ -159,8 +161,8 @@ public class TransactionDAO {
             SELECT COALESCE(SUM(amount), 0)
             FROM transactions
             WHERE type = 'INCOME'
-            AND MONTH(date) = MONTH(CURRENT_DATE())
-            AND YEAR(date) = YEAR(CURRENT_DATE())
+            AND MONTH(DATE(created_at)) = MONTH(CURRENT_DATE())
+            AND YEAR(DATE(created_at)) = YEAR(CURRENT_DATE())
             AND user_id = ?
         """;
 
@@ -183,8 +185,8 @@ public class TransactionDAO {
             SELECT COALESCE(SUM(amount), 0)
             FROM transactions
             WHERE type = 'EXPENSE'
-            AND MONTH(date) = MONTH(CURRENT_DATE())
-            AND YEAR(date) = YEAR(CURRENT_DATE())
+            AND MONTH(DATE(created_at)) = MONTH(CURRENT_DATE())
+            AND YEAR(DATE(created_at)) = YEAR(CURRENT_DATE())
             AND user_id = ?
         """;
 
@@ -208,7 +210,8 @@ public class TransactionDAO {
         SELECT t.*, c.name AS category_name 
         FROM transactions t
         JOIN categories c ON t.category_id = c.id
-        WHERE DATE(t.date) = CURDATE() AND t.user_id = ?
+        WHERE DATE(t.created_at) = CURDATE()
+          AND t.user_id = ?
     """;
 
         try ( Connection conn = DBConnectionManager.Connect();

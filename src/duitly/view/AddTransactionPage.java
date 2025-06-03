@@ -10,8 +10,9 @@ import duitly.model.Transaction;
 import duitly.model.TransactionType;
 import duitly.model.User;
 import duitly.util.ErrorDialogSwing;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
 import javax.swing.JFrame;
 
@@ -41,18 +42,21 @@ public class AddTransactionPage extends javax.swing.JFrame {
        jLabel1.setText("Hello " + user.getUsername());
     }
      
-     private void showCategoriesChoices() {
+     public void showCategoriesChoices() {
          List<Category> categories = mainController.getAllCategoriesCurrentUser();
+//         DefaultComboBoxModel<Category> model = new DefaultComboBoxModel<>();
          
          jComboBox2.removeAllItems();
          String selectedType = (String) jComboBox1.getSelectedItem();
          for (Category category : categories) {
-             if (category.getType().name().equals(selectedType)) {
-                 System.out.println("Kategori ditambahkan: " + category);
-//               jComboBox2.addItem(category);
+             if (category.getType().name().equals(selectedType.toUpperCase())) {                 
+                 jComboBox2.addItem(category);
              } 
          }
+         
+         
      }
+     
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -90,11 +94,15 @@ public class AddTransactionPage extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jComboBox2.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cash", "Bank", "E-Wallet" }));
         getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, -1, -1));
 
         jComboBox1.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Income", "Expense" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 110, -1));
 
         jLabel6.setFont(new java.awt.Font("Helvetica", 0, 16)); // NOI18N
@@ -127,13 +135,12 @@ public class AddTransactionPage extends javax.swing.JFrame {
         jLabel7.setText("Description");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 120, -1, -1));
 
-        jTextField1.setText("Rp ");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, 160, -1));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, 130, -1));
 
         jButton6.setBackground(new java.awt.Color(25, 135, 84));
         jButton6.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
@@ -279,7 +286,15 @@ public class AddTransactionPage extends javax.swing.JFrame {
 
     private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
         // TODO add your handling code here:
-        AddKategoriModal tambahkategori = new AddKategoriModal(this, true);
+        AddCategoryModal tambahkategori = new AddCategoryModal(this, true, mainController);
+        
+        // Menambahkan listener saat dialog ditutup
+        tambahkategori.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                showCategoriesChoices(); // ini method kamu untuk update data kategori
+            }
+        });
         tambahkategori.setLocationRelativeTo(null);
         tambahkategori.setVisible(true);
     }//GEN-LAST:event_jButton9MouseClicked
@@ -332,7 +347,7 @@ public class AddTransactionPage extends javax.swing.JFrame {
             String amountText = jTextField1.getText().trim();
             BigDecimal amount = new BigDecimal(amountText);
             String selectedType = (String) jComboBox1.getSelectedItem();
-            TransactionType type = TransactionType.valueOf(selectedType);
+            TransactionType type = TransactionType.valueOf(selectedType.toUpperCase());
             Category selectedCategory = (Category) jComboBox2.getSelectedItem();
             Transaction transaction = new Transaction();
             transaction.setDescription(description);
@@ -341,6 +356,8 @@ public class AddTransactionPage extends javax.swing.JFrame {
             transaction.setCategoryId(selectedCategory.getId());
 
             mainController.addTransaction(transaction);
+            new TransactionPage(mainController);
+            this.dispose();
             
         } catch (Exception e) {
             ErrorDialogSwing.showError("Add transaction Error", e.getLocalizedMessage());
@@ -348,6 +365,11 @@ public class AddTransactionPage extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jButton6MouseClicked
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+        showCategoriesChoices();
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -384,7 +406,7 @@ public class AddTransactionPage extends javax.swing.JFrame {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<Category> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

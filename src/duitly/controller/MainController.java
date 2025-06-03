@@ -129,26 +129,4 @@ public class MainController {
             throw e;
         }
     }
-
-    public void updateCategory(Category category) {
-        try {
-            if (categoryController != null) {
-                categoryController.updateCategory(category);
-            }
-            
-        } catch (Exception e) {
-            throw e;
-        }
-    }
-
-    public void deleteCategory(int id) {
-        try {
-            if (categoryController != null) {
-                categoryController.deleteCategory(id);
-            }
-            
-        } catch (Exception e) {
-            throw e;
-        }
-    }
 }

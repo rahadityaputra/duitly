@@ -5,8 +5,11 @@
 package duitly.view;
 
 import duitly.controller.MainController;
+import duitly.model.Transaction;
 import duitly.model.User;
+import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -24,6 +27,7 @@ public class TransactionPage extends javax.swing.JFrame {
         this.mainController = mainController;
         initComponents();
         sayHello();
+        showTransactionTable();
         setExtendedState(JFrame.MAXIMIZED_HORIZ);
         setVisible(true);
         setResizable(false);
@@ -33,6 +37,48 @@ public class TransactionPage extends javax.swing.JFrame {
     private void sayHello() {
         User user = mainController.getCurrentUser();
        jLabel1.setText("Hello " + user.getUsername());
+    }
+    
+    private void showTransactionTable() {
+        List<Transaction> transactions = mainController.getAllTransactions();
+        DefaultTableModel model = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // semua kolom tidak bisa diedit
+            }
+        };
+        
+        
+        
+        model.setColumnIdentifiers(new String[]{"ID", "Category" ,"Type", "Amount", "Date"});
+        for (Transaction transaction : transactions) {
+        model.addRow(new Object[]{
+            transaction.getId(),
+            transaction.getCategoryName(),
+            transaction.getType().toString(),
+            transaction.getAmount().toString(),
+            transaction.getCreated_at(),
+        });
+        }
+        
+        jTable1.setModel(model);
+        
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                if (evt.getClickCount() == 2) {
+                    int row = jTable1.rowAtPoint(evt.getPoint());
+                    if (row >= 0) {
+                        // Misalnya kolom 0 adalah ID transaksi
+                        int id = (int) jTable1.getValueAt(row, 0);
+                        System.out.println("Double-clicked row, ID: " + id);
+
+                        // Bisa buka dialog edit, detail, dll.
+                        // new TransactionDetailDialog(id).setVisible(true);
+                    }
+                }
+            }
+        });
     }
 
     /**
@@ -51,8 +97,6 @@ public class TransactionPage extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -64,6 +108,11 @@ public class TransactionPage extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(255, 171, 46));
         jButton1.setFont(new java.awt.Font("Helvetica", 1, 13)); // NOI18N
         jButton1.setText("Dashboard");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -85,6 +134,11 @@ public class TransactionPage extends javax.swing.JFrame {
         jButton3.setBackground(new java.awt.Color(255, 171, 46));
         jButton3.setFont(new java.awt.Font("Helvetica", 1, 13)); // NOI18N
         jButton3.setText("Profile");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -131,27 +185,6 @@ public class TransactionPage extends javax.swing.JFrame {
         jButton6.setContentAreaFilled(false);
         jButton6.setBorderPainted(false);
 
-        jButton7.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
-        jButton7.setText("Remove Transaction");
-        jButton7.setBorderPainted(false);
-        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 510, 180, 47));
-        jButton7.setOpaque(false);
-        jButton7.setContentAreaFilled(false);
-        jButton7.setBorderPainted(false);
-
-        jButton8.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
-        jButton8.setText("Edit Transaction");
-        jButton8.setBorderPainted(false);
-        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton8MouseClicked(evt);
-            }
-        });
-        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 510, -1, 47));
-        jButton8.setOpaque(false);
-        jButton8.setContentAreaFilled(false);
-        jButton8.setBorderPainted(false);
-
         jLabel1.setFont(new java.awt.Font("Helvetica", 1, 24)); // NOI18N
         jLabel1.setText("Hello, Rahaditya!");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
@@ -175,42 +208,25 @@ public class TransactionPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
-        // TODO add your handling code here:
-        new EditTransaksi(mainController);
-        this.dispose();
-    }//GEN-LAST:event_jButton8MouseClicked
-
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
         // TODO add your handling code here:
         new AddTransactionPage(mainController);
         this.dispose();
     }//GEN-LAST:event_jButton6MouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-//            logger.log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(() -> new Transaksi().setVisible(true));
-//    }
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        new Dashboard(mainController);
+        this.dispose();
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        // TODO add your handling code here:
+        new Profile(mainController);
+        this.dispose();
+    }//GEN-LAST:event_jButton3MouseClicked
+
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -218,8 +234,6 @@ public class TransactionPage extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
