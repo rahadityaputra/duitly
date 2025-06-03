@@ -37,6 +37,13 @@ public class MainController {
     public void register(String username, String password, String fullname, String email) {
         try {
             userController.register(username, password, fullname, email);
+            User user = userController.getCurrentUser();
+             if (user != null) {
+                this.transactionController = new TransactionController(user);
+                this.categoryController = new CategoryController(user);
+            } else {
+                throw new UserException("user not registered");
+            }
         } catch (UserException e) {
             throw e;
         }
@@ -105,9 +112,9 @@ public class MainController {
         return dashboardSummary;
     }
 
-    public List<Category> getAllCategories() {
+    public List<Category> getAllCategoriesCurrentUser() {
         if (categoryController != null) {
-            return categoryController.getAllCategories();
+            return categoryController.getAllCategoriesCurrentUser();
         }
         return null;
     }

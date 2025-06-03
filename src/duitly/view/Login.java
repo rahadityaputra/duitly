@@ -73,7 +73,7 @@ public class Login extends javax.swing.JFrame {
                 jPasswordField1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, 400, 29));
+        getContentPane().add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, 400, 29));
 
         jLabel5.setFont(new java.awt.Font("Helvetica", 0, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 238));
@@ -97,7 +97,7 @@ public class Login extends javax.swing.JFrame {
                 jTextField3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 340, 400, 29));
+        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 400, 29));
 
         jLabel3.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(31, 32, 31));
@@ -115,7 +115,7 @@ public class Login extends javax.swing.JFrame {
         jLabel10.setText("Duitly");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 70, -1));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Documents\\ngodong\\Pbo\\duitly\\JAR\\Login2.png")); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon("/home/rahadityaputra/NetBeansProjects/duitly/JAR/Login2.png")); // NOI18N
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 600));
 
         pack();
@@ -142,11 +142,13 @@ public class Login extends javax.swing.JFrame {
             char[] passwordChars = jPasswordField1.getPassword();
             String password = new String(passwordChars);
             MainController mainController = new MainController();
-            mainController.login("adit1234", "rumah1234");
+            mainController.login(username, password);
             new Dashboard(mainController); 
             this.dispose();
         } catch (Exception e) {
             ErrorDialogSwing.showError("Login failed", e.getLocalizedMessage());
+            jTextField3.setText("");
+            jPasswordField1.setText("");
         }
         
         

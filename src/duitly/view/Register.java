@@ -53,7 +53,7 @@ public class Register extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(31, 32, 31));
         jLabel2.setText("Username");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 70, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 160, -1));
 
         jTextField3.setFont(new java.awt.Font("Helvetica", 0, 12)); // NOI18N
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
@@ -148,7 +148,7 @@ public class Register extends javax.swing.JFrame {
         jLabel10.setText("Duitly");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 70, -1));
 
-        jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Documents\\ngodong\\Pbo\\duitly\\JAR\\Login.png")); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon("/home/rahadityaputra/NetBeansProjects/duitly/JAR/Login.png")); // NOI18N
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 600));
 
         pack();
@@ -182,8 +182,10 @@ public class Register extends javax.swing.JFrame {
         String username = jTextField3.getText();
         String fullname = jTextField4.getText();
         String email = jTextField5.getText();
-        String password = jPasswordField1.getText();
-        String passwordConfirmation= jPasswordField2.getText();
+        char[] passwordChars = jPasswordField1.getPassword();
+        String password = new String(passwordChars);
+        char[] passwordCharsConfirmation = jPasswordField2.getPassword();
+        String passwordConfirmation = new String(passwordCharsConfirmation);
         
         
          if (password.equals(passwordConfirmation)) {

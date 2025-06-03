@@ -43,9 +43,9 @@ public class CategoryController {
         }
     }
 
-    public List<Category> getAllCategories() {
+    public List<Category> getAllCategoriesCurrentUser() {
         try {
-            return categoryDAO.getAllCategories();
+            return categoryDAO.getAllCategoriesByUserId(currentUser.getId());
         } catch (Exception e) {
             throw new CategoryException("Failed to retrieve categories: " + e.getMessage(), e);
         }

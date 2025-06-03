@@ -52,39 +52,39 @@ public class TransactionDAO {
         }
     }
 
-    public List<Transaction> getAllTransaction() {
-        List<Transaction> transactions = new ArrayList<>();
-        String query = """
-        SELECT t.*, c.name AS category_name 
-        FROM transactions t
-        JOIN categories c ON t.category_id = c.id
-    """;
-        try (
-                Connection conn = DBConnectionManager.Connect();
-                PreparedStatement stmt = conn.prepareStatement(query);) {
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-
-                int id = rs.getInt("id");
-                String description = rs.getString("description");
-                BigDecimal amount = rs.getBigDecimal("amount");
-                LocalDate date = rs.getDate("date").toLocalDate();
-                int categoryId = rs.getInt("categiry_id");
-                String categoryName = rs.getString("category_name");
-                int userId = rs.getInt("user_id");
-                TransactionType type = TransactionType.valueOf(rs.getString("type"));
-                Timestamp created_at = rs.getTimestamp("created_at");
-
-                Transaction transaction = new Transaction(id, userId, type, amount, description, date, categoryId, categoryName,
-                        created_at);
-                transactions.add(transaction);
-            }
-
-        } catch (SQLException e) {
-            System.out.println(e.getLocalizedMessage());
-        }
-        return transactions;
-    }
+//    public List<Transaction> getAllTransaction() {
+//        List<Transaction> transactions = new ArrayList<>();
+//        String query = """
+//        SELECT t.*, c.name AS category_name 
+//        FROM transactions t
+//        JOIN categories c ON t.category_id = c.id
+//    """;
+//        try (
+//                Connection conn = DBConnectionManager.Connect();
+//                PreparedStatement stmt = conn.prepareStatement(query);) {
+//            ResultSet rs = stmt.executeQuery();
+//            while (rs.next()) {
+//
+//                int id = rs.getInt("id");
+//                String description = rs.getString("description");
+//                BigDecimal amount = rs.getBigDecimal("amount");
+//                LocalDate date = rs.getDate("date").toLocalDate();
+//                int categoryId = rs.getInt("categiry_id");
+//                String categoryName = rs.getString("category_name");
+//                int userId = rs.getInt("user_id");
+//                TransactionType type = TransactionType.valueOf(rs.getString("type"));
+//                Timestamp created_at = rs.getTimestamp("created_at");
+//
+//                Transaction transaction = new Transaction(id, userId, type, amount, description, date, categoryId,
+//                        created_at);
+//                transactions.add(transaction);
+//            }
+//
+//        } catch (SQLException e) {
+//            System.out.println(e.getLocalizedMessage());
+//        }
+//        return transactions;
+//    }
 
     public List<Transaction> getAllTransactionsByUserId(int userId) {
         List<Transaction> transactions = new ArrayList<>();
@@ -102,15 +102,14 @@ public class TransactionDAO {
             while (rs.next()) {
 
                 int id = rs.getInt("id");
-                String description = rs.getString("description");
-                BigDecimal amount = rs.getBigDecimal("amount");
-                LocalDate date = rs.getDate("date").toLocalDate();
                 int categoryId = rs.getInt("categiry_id");
                 String categoryName = rs.getString("category_name");
                 TransactionType type = TransactionType.valueOf(rs.getString("type"));
+                BigDecimal amount = rs.getBigDecimal("amount");
+                String description = rs.getString("description");
                 Timestamp created_at = rs.getTimestamp("created_at");
 
-                Transaction transaction = new Transaction(id, userId, type, amount, description, date, categoryId, categoryName,
+                Transaction transaction = new Transaction(id, userId, categoryId, categoryName, type, amount, description,
                         created_at);
                 transactions.add(transaction);
             }
@@ -122,7 +121,7 @@ public class TransactionDAO {
     }
 
 
-    public Transaction getTransactionById(int transactionId) {
+    public Transaction getTransactionById(int id) {
         String query = """
         SELECT t.*, c.name AS category_name 
         FROM transactions t
@@ -132,22 +131,18 @@ public class TransactionDAO {
         try (
                 Connection conn = DBConnectionManager.Connect();
                 PreparedStatement stmt = conn.prepareStatement(query);) {
-            stmt.setInt(1, transactionId);
+            stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-
-                int id = rs.getInt("id");
                 int userId = rs.getInt("user_id");
-                String description = rs.getString("description");
-                BigDecimal amount = rs.getBigDecimal("amount");
-                LocalDate date = rs.getDate("date").toLocalDate();
                 int categoryId = rs.getInt("categiry_id");
                 String categoryName = rs.getString("category_name");
                 TransactionType type = TransactionType.valueOf(rs.getString("type"));
+                BigDecimal amount = rs.getBigDecimal("amount");
+                String description = rs.getString("description");           
                 Timestamp created_at = rs.getTimestamp("created_at");
 
-                Transaction transaction = new Transaction(id, userId, type, amount, description, date, categoryId, categoryName,
-                        created_at);
+                Transaction transaction = new Transaction(id, userId, categoryId, categoryName, type, amount, description, created_at);
                 return transaction;
             }
             return null;
@@ -226,14 +221,14 @@ public class TransactionDAO {
                 int categoryId = rs.getInt("category_id");
                 String categoryName = rs.getString("category_name");
                 String typeStr = rs.getString("type");
-                String description = rs.getString("description");
+                TransactionType type = TransactionType.valueOf(typeStr);
                 BigDecimal amount = rs.getBigDecimal("amount");
-                LocalDate date = rs.getDate("date").toLocalDate();
+                String description = rs.getString("description");
                 Timestamp createdAt = rs.getTimestamp("created_at");
 
-                TransactionType type = TransactionType.valueOf(typeStr);
+                
 
-                Transaction transaction = new Transaction(id, userId, type, amount, description, date, categoryId,categoryName, createdAt);
+                Transaction transaction = new Transaction(id, userId, categoryId, categoryName, type, amount, description, createdAt);
                 transactions.add(transaction);
             }
 

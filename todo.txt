@@ -1,0 +1,14 @@
+-- tambah kategori
+-- tambah transaksi
+-- edit transaksi
+-- profil (nampilin doang) #selesai
+-- background buat halaman tambah transaksi mana ?
+-- login (cek lagi) #selesai
+-- register (cek lagi) #selesai 
+-- logout  #selesai
+-- hapus transaksi
+-- lihat transaksi (opsional)
+-- kategori tidak perlu deskriptsi hapus aja #selesai
+-- cek alur halaman agar bisa kembali ke halaman selanjutnya #selesai
+-- buat error handling yang baik
+

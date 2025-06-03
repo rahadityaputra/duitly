@@ -64,6 +64,7 @@
         <Property name="borderPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton4MouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
       </Events>
       <AuxValues>
@@ -203,7 +204,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="290" y="160" width="-1" height="-1"/>
+          <AbsoluteConstraints x="290" y="150" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -262,7 +263,7 @@
     <Component class="javax.swing.JLabel" name="BackgroundImg">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\User\Documents\ngodong\Pbo\duitly\JAR\Dashboard.png"/>
+          <Image iconType="2" name="/home/rahadityaputra/NetBeansProjects/duitly/JAR/Dashboard.png"/>
         </Property>
       </Properties>
       <Constraints>

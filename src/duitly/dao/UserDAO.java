@@ -127,12 +127,28 @@ public class UserDAO {
 
     }
 
-    public Boolean checkUsernameExists(String username) {
+    public Boolean checkUserExists(String username) {
         String query = "SELECT 1 FROM users WHERE username = ? LIMIT 1";
         try (
                 Connection conn = DBConnectionManager.Connect();
                 PreparedStatement pstmt = conn.prepareStatement(query);) {
             pstmt.setString(1, username);
+            ResultSet result = pstmt.executeQuery();
+            return result.next();
+
+        } catch (SQLException e) {
+            System.err.println(e.getLocalizedMessage());
+            return false;
+        }
+    }
+    
+    public Boolean checkUserExists(String username, String email) {
+        String query = "SELECT 1 FROM users WHERE username = ? OR email = ? LIMIT 1";
+        try (
+                Connection conn = DBConnectionManager.Connect();
+                PreparedStatement pstmt = conn.prepareStatement(query);) {
+            pstmt.setString(1, username);
+            pstmt.setString(2, email);
             ResultSet result = pstmt.executeQuery();
             return result.next();
 

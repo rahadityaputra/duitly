@@ -4,25 +4,55 @@
  */
 package duitly.view;
 
+import duitly.controller.MainController;
+import duitly.model.Category;
+import duitly.model.Transaction;
+import duitly.model.TransactionType;
+import duitly.model.User;
+import duitly.util.ErrorDialogSwing;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.List;
 import javax.swing.JFrame;
 
 /**
  *
  * @author arkankhalifamusta
  */
-public class TambahTransaksi extends javax.swing.JFrame {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TambahTransaksi.class.getName());
+public class AddTransactionPage extends javax.swing.JFrame {
+    private final MainController mainController;
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AddTransactionPage.class.getName());
 
     /**
      * Creates new form Dashboard
      */
-    public TambahTransaksi() {
+    public AddTransactionPage(MainController mainController) {
+        this.mainController = mainController;
         initComponents();
+        sayHello();
+        showCategoriesChoices();
         setExtendedState(JFrame.MAXIMIZED_HORIZ);
         setVisible(true);
         setResizable(false);
     }
+    
+     private void sayHello() {
+        User user = mainController.getCurrentUser();
+       jLabel1.setText("Hello " + user.getUsername());
+    }
+     
+     private void showCategoriesChoices() {
+         List<Category> categories = mainController.getAllCategoriesCurrentUser();
+         
+         jComboBox2.removeAllItems();
+         String selectedType = (String) jComboBox1.getSelectedItem();
+         for (Category category : categories) {
+             if (category.getType().name().equals(selectedType)) {
+                 System.out.println("Kategori ditambahkan: " + category);
+//               jComboBox2.addItem(category);
+             } 
+         }
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,13 +65,11 @@ public class TambahTransaksi extends javax.swing.JFrame {
 
         jComboBox2 = new javax.swing.JComboBox<>();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jCalendarPanel1 = new de.wannawork.jcalendar.JCalendarPanel();
         jTextField1 = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -63,24 +91,25 @@ public class TambahTransaksi extends javax.swing.JFrame {
 
         jComboBox2.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cash", "Bank", "E-Wallet" }));
-        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 140, -1, -1));
+        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, -1, -1));
 
         jComboBox1.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Income", "Expense" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 140, 110, -1));
-
-        jLabel3.setFont(new java.awt.Font("Helvetica", 0, 16)); // NOI18N
-        jLabel3.setText("Date");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, -1, -1));
+        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 110, -1));
 
         jLabel6.setFont(new java.awt.Font("Helvetica", 0, 16)); // NOI18N
         jLabel6.setText("Category");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 120, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, -1, -1));
 
         jButton7.setBackground(new java.awt.Color(220, 53, 69));
         jButton7.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
         jButton7.setText("Cancel");
         jButton7.setBorderPainted(false);
+        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton7MouseClicked(evt);
+            }
+        });
         getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 510, 100, 50));
         jButton7.setOpaque(false);
         jButton7.setContentAreaFilled(false);
@@ -88,7 +117,7 @@ public class TambahTransaksi extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Helvetica", 0, 16)); // NOI18N
         jLabel4.setText("Amount");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 240, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Helvetica", 1, 20)); // NOI18N
         jLabel2.setText("Add Transaction");
@@ -96,8 +125,7 @@ public class TambahTransaksi extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Helvetica", 0, 16)); // NOI18N
         jLabel7.setText("Description");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 360, -1, -1));
-        getContentPane().add(jCalendarPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 120, -1, -1));
 
         jTextField1.setText("Rp ");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -105,12 +133,17 @@ public class TambahTransaksi extends javax.swing.JFrame {
                 jTextField1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 260, 160, -1));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, 160, -1));
 
         jButton6.setBackground(new java.awt.Color(25, 135, 84));
         jButton6.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
         jButton6.setText("Save");
         jButton6.setBorderPainted(false);
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
+            }
+        });
         getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 510, 100, 50));
         jButton6.setOpaque(false);
         jButton6.setContentAreaFilled(false);
@@ -120,25 +153,30 @@ public class TambahTransaksi extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 380, 290, 110));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 150, 290, 110));
 
         jButton8.setBackground(new java.awt.Color(255, 193, 7));
         jButton8.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
         jButton8.setText("Reset");
         jButton8.setBorderPainted(false);
+        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton8MouseClicked(evt);
+            }
+        });
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 510, 110, 50));
+        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 510, 110, 50));
         jButton8.setOpaque(false);
         jButton8.setContentAreaFilled(false);
         jButton8.setBorderPainted(false);
 
         jLabel5.setFont(new java.awt.Font("Helvetica", 0, 16)); // NOI18N
         jLabel5.setText("Type");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 120, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, -1, -1));
 
         jButton9.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         jButton9.setText("Add Category");
@@ -148,7 +186,7 @@ public class TambahTransaksi extends javax.swing.JFrame {
                 jButton9MouseClicked(evt);
             }
         });
-        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 180, 130, -1));
+        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 290, 130, -1));
         jButton9.setOpaque(false);
         jButton9.setContentAreaFilled(false);
         jButton9.setBorderPainted(false);
@@ -157,6 +195,11 @@ public class TambahTransaksi extends javax.swing.JFrame {
         jButton4.setFont(new java.awt.Font("Helvetica", 1, 13)); // NOI18N
         jButton4.setText("Logout");
         jButton4.setBorderPainted(false);
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -171,6 +214,11 @@ public class TambahTransaksi extends javax.swing.JFrame {
         jButton3.setFont(new java.awt.Font("Helvetica", 1, 13)); // NOI18N
         jButton3.setText("Profile");
         jButton3.setBorderPainted(false);
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 180, 35));
         jButton3.setOpaque(false);
         jButton3.setContentAreaFilled(false);
@@ -180,6 +228,11 @@ public class TambahTransaksi extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Helvetica", 1, 13)); // NOI18N
         jButton2.setText("Transactions");
         jButton2.setBorderPainted(false);
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 180, 40));
         jButton2.setOpaque(false);
         jButton2.setContentAreaFilled(false);
@@ -189,6 +242,11 @@ public class TambahTransaksi extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Helvetica", 1, 13)); // NOI18N
         jButton1.setText("Dashboard");
         jButton1.setBorderPainted(false);
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 180, 50));
         jButton1.setOpaque(false);
         jButton1.setContentAreaFilled(false);
@@ -201,8 +259,6 @@ public class TambahTransaksi extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Helvetica Rounded", 1, 20)); // NOI18N
         jLabel10.setText("Duitly");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 70, -1));
-
-        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Documents\\ngodong\\Pbo\\duitly\\JAR\\EditTransaksi.png")); // NOI18N
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
 
         pack();
@@ -223,35 +279,100 @@ public class TambahTransaksi extends javax.swing.JFrame {
 
     private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
         // TODO add your handling code here:
-        TambahKategori tambahkategori = new TambahKategori(this, true);
+        AddKategoriModal tambahkategori = new AddKategoriModal(this, true);
         tambahkategori.setLocationRelativeTo(null);
         tambahkategori.setVisible(true);
     }//GEN-LAST:event_jButton9MouseClicked
 
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        new Dashboard(mainController);
+        this.dispose();
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+        new TransactionPage(mainController);
+        this.dispose();
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        // TODO add your handling code here:
+        new Profile(mainController);
+        this.dispose();
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        // TODO add your handling code here:
+        new Login();
+        this.dispose();
+    }//GEN-LAST:event_jButton4MouseClicked
+
+    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
+        // TODO add your handling code here:
+        new TransactionPage(mainController);
+        this.dispose();
+    }//GEN-LAST:event_jButton7MouseClicked
+
+    private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
+        // TODO add your handling code here:
+        // hapus semua inputan user
+        
+        
+    }//GEN-LAST:event_jButton8MouseClicked
+
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+        // TODO add your handling code here:
+        // tambah transaksi
+        
+        // data yang dibutuhkan = deskripsi transaksi, tipe transaksi, jumlah uang, jenis kategori.
+        
+        try {
+            String description = jTextArea1.getText();
+            String amountText = jTextField1.getText().trim();
+            BigDecimal amount = new BigDecimal(amountText);
+            String selectedType = (String) jComboBox1.getSelectedItem();
+            TransactionType type = TransactionType.valueOf(selectedType);
+            Category selectedCategory = (Category) jComboBox2.getSelectedItem();
+            Transaction transaction = new Transaction();
+            transaction.setDescription(description);
+            transaction.setAmouunt(amount);
+            transaction.setType(type);
+            transaction.setCategoryId(selectedCategory.getId());
+
+            mainController.addTransaction(transaction);
+            
+        } catch (Exception e) {
+            ErrorDialogSwing.showError("Add transaction Error", e.getLocalizedMessage());
+        }
+        
+        
+    }//GEN-LAST:event_jButton6MouseClicked
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new TambahTransaksi().setVisible(true));
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+//            logger.log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(() -> new TambahTransaksi().setVisible(true));
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -262,13 +383,11 @@ public class TambahTransaksi extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private de.wannawork.jcalendar.JCalendarPanel jCalendarPanel1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

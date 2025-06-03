@@ -3,15 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/User/Documents/ngodong/Pbo/duitly/src/duitly/view/TambahTransaksi.java</file>
-            <file>file:/C:/Users/User/Documents/ngodong/Pbo/duitly/src/duitly/view/Profile.java</file>
-            <file>file:/C:/Users/User/Documents/ngodong/Pbo/duitly/src/duitly/view/EditTransaksi.java</file>
-            <file>file:/C:/Users/User/Documents/ngodong/Pbo/duitly/src/duitly/view/TransactionForm.java</file>
-            <file>file:/C:/Users/User/Documents/ngodong/Pbo/duitly/src/duitly/view/Login.java</file>
-            <file>file:/C:/Users/User/Documents/ngodong/Pbo/duitly/src/duitly/view/Register.java</file>
-            <file>file:/C:/Users/User/Documents/ngodong/Pbo/duitly/src/duitly/view/TambahKategori.java</file>
-            <file>file:/C:/Users/User/Documents/ngodong/Pbo/duitly/src/duitly/view/Dashboard.java</file>
-            <file>file:/C:/Users/User/Documents/ngodong/Pbo/duitly/src/duitly/view/Transaksi.java</file>
+            <file>file:/home/rahadityaputra/NetBeansProjects/duitly/src/duitly/view/Register.java</file>
+            <file>file:/home/rahadityaputra/NetBeansProjects/duitly/src/duitly/Duitly.java</file>
+            <file>file:/home/rahadityaputra/NetBeansProjects/duitly/src/duitly/view/Profile.java</file>
+            <file>file:/home/rahadityaputra/NetBeansProjects/duitly/src/duitly/view/Dashboard.java</file>
+            <file>file:/home/rahadityaputra/NetBeansProjects/duitly/src/duitly/view/EditTransaksi.java</file>
+            <file>file:/home/rahadityaputra/NetBeansProjects/duitly/src/duitly/view/Login.java</file>
+            <file>file:/home/rahadityaputra/NetBeansProjects/duitly/src/duitly/controller/MainController.java</file>
+            <file>file:/home/rahadityaputra/NetBeansProjects/duitly/src/duitly/controller/UserController.java</file>
+            <file>file:/home/rahadityaputra/NetBeansProjects/duitly/src/duitly/dao/UserDAO.java</file>
+            <file>file:/home/rahadityaputra/NetBeansProjects/duitly/src/duitly/view/TransactionPage.java</file>
+            <file>file:/home/rahadityaputra/NetBeansProjects/duitly/src/duitly/view/AddTransactionPage.java</file>
         </group>
     </open-files>
 </project-private>

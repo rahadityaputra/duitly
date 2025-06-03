@@ -14,7 +14,7 @@ public class UserController {
 
     public void login(String username, String password) {
         try {
-            boolean isUserRegistered = userDAO.checkUsernameExists(username);
+            boolean isUserRegistered = userDAO.checkUserExists(username);
             if (isUserRegistered) {
                 System.out.println("Login successful!");
                 currentUser = userDAO.getUser(username);
@@ -28,7 +28,7 @@ public class UserController {
 
     public void register(String username, String password, String fullname, String email) {
         try {
-            boolean isUserRegistered = userDAO.checkUsernameExists(username);
+            boolean isUserRegistered = userDAO.checkUserExists(username, email);
             if (!isUserRegistered) {
                 User newUser = new User(username, password, fullname, email);
                 userDAO.saveUser(newUser);

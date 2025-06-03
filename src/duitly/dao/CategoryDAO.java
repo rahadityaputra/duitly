@@ -14,14 +14,15 @@ import duitly.model.TransactionType;
 public class CategoryDAO {
 
     public void insertCategory(Category category) {
-        String query = "INSERT INTO categories (name, description, type) VALUES (?, ?, ?)";
+        String query = "INSERT INTO categories (user_id, name, type) VALUES (?, ?, ?)";
 
         try (Connection conn = DBConnectionManager.Connect();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
 
-            stmt.setString(1, category.getName());
-            stmt.setString(1, category.getDescription());
-            stmt.setString(2, category.getType().name());
+            stmt.setInt(1, category.getUserId());
+            stmt.setString(2, category.getName());
+            stmt.setString(3, category.getType().name());
+            
             stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -30,13 +31,12 @@ public class CategoryDAO {
     }
 
     public void updateCategory(Category category) {
-        String query = "UPDATE categories SET name = ?, type = ?, description = ? WHERE id = ?";
+        String query = "UPDATE categories SET name = ?, type = ? WHERE id = ?";
 
         try (Connection conn = DBConnectionManager.Connect();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, category.getName());
-            stmt.setString(1, category.getDescription());
             stmt.setString(2, category.getType().name());
             stmt.setInt(3, category.getId());
             stmt.executeUpdate();
@@ -60,22 +60,22 @@ public class CategoryDAO {
         }
     }
 
-    public List<Category> getAllCategories() {
+    public List<Category> getAllCategoriesByUserId(int userId) {
         List<Category> categories = new ArrayList<>();
-        String query = "SELECT * FROM categories";
+        String query = "SELECT * FROM categories WHERE user_id = ?";
 
         try (Connection conn = DBConnectionManager.Connect();
-                PreparedStatement stmt = conn.prepareStatement(query);
-                ResultSet rs = stmt.executeQuery()) {
-
+                PreparedStatement pstmt = conn.prepareStatement(query);
+                ) {
+            
+            pstmt.setInt(1, userId);
+            ResultSet rs = pstmt.executeQuery();
+            
             while (rs.next()) {
                 int id = rs.getInt("id");
-                int userId = rs.getInt("user_id");
                 String name = rs.getString("name");
-                String description = rs.getString("description");
                 TransactionType type = TransactionType.valueOf(rs.getString("type"));
-
-                categories.add(new Category(id, userId, name, description, type));
+                categories.add(new Category(id, userId, name, type));
             }
 
         } catch (SQLException e) {
@@ -98,7 +98,6 @@ public class CategoryDAO {
                         rs.getInt("id"),
                         rs.getInt("user_id"),
                         rs.getString("name"),
-                        rs.getString("description"),
                         TransactionType.valueOf(rs.getString("type")));
             }
 

@@ -14,13 +14,15 @@ public class Transaction {
     private LocalDate date;
     private Timestamp created_at;
     private int categoryId;
+    
+    public Transaction() {
+        
+    }
 
-    public Transaction(int id, int userId, TransactionType type, BigDecimal amount, String description, LocalDate date,
-            int categoryId, String categoryName, Timestamp created_at) {
+    public Transaction(int id, int userId, int categoryId, String categoryName, TransactionType type, BigDecimal amount, String description, Timestamp created_at) {
         this.id = id;
         this.description = description;
         this.amount = amount;
-        this.date = date;
         this.type = type;
         this.categoryId = categoryId;
         this.categoryName = categoryName;
@@ -29,16 +31,23 @@ public class Transaction {
     }
 
 
-	public int getId() {
+public int getId() {
         return this.id;
     }
 
     public String getDescription() {
         return this.description;
     }
+    
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public BigDecimal getAmount() {
         return this.amount;
+    }
+    public void setAmouunt(BigDecimal amount) {
+        this.amount = amount;
     }
 
     public LocalDate getDate() {
@@ -47,6 +56,10 @@ public class Transaction {
 
     public TransactionType getType() {
         return this.type;
+    }
+    
+     public void setType(TransactionType type) {
+        this.type = type;
     }
 
     public int getUserId() {
