@@ -176,7 +176,7 @@ public class AddTransactionPage extends javax.swing.JFrame {
                 jButton8ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 510, 110, 50));
+        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 510, 110, 50));
         jButton8.setOpaque(false);
         jButton8.setContentAreaFilled(false);
         jButton8.setBorderPainted(false);
@@ -266,6 +266,8 @@ public class AddTransactionPage extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Helvetica Rounded", 1, 20)); // NOI18N
         jLabel10.setText("Duitly");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 70, -1));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon("/home/rahadityaputra/NetBeansProjects/duitly/JAR/EditTransaksi.png")); // NOI18N
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
 
         pack();
