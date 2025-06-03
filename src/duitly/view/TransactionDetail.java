@@ -1,38 +1,21 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package duitly.view;
 
-import duitly.controller.MainController;
-import duitly.model.User;
-import javax.swing.JFrame;
-
 /**
  *
- * @author arkankhalifamusta
+ * @author User
  */
-public class TransactionDetail extends javax.swing.JFrame {
-    private final MainController mainController;
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TransactionDetail.class.getName());
+public class TransactionDetail extends javax.swing.JDialog {
 
     /**
-     * Creates new form Dashboard
+     * Creates new form TransactionDetail
      */
-    public TransactionDetail(MainController mainController) {
-        this.mainController = mainController;
+    public TransactionDetail(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
-        sayHello();
-        setExtendedState(JFrame.MAXIMIZED_HORIZ);
-        setVisible(true);
-        setResizable(false);
-    }
-    
-        // untuk ucapan halo ke user
-    private void sayHello() {
-        User user = mainController.getCurrentUser();
-       jLabel1.setText("Hello " + user.getUsername());
     }
 
     /**
@@ -44,174 +27,213 @@ public class TransactionDetail extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        IdLabel = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        DescriptionLabel = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        NameLabel = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        DateLabel = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        CategoryLabel = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        TypeLabel = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        TimeLabel = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        AmountLabel = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(233, 238, 238));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(255, 171, 46));
-        jButton1.setFont(new java.awt.Font("Helvetica", 1, 13)); // NOI18N
-        jButton1.setText("Dashboard");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        jLabel3.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        jLabel3.setText("ID");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
+
+        IdLabel.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        IdLabel.setText("jLabel12");
+        getContentPane().add(IdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        jLabel8.setText("Description");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, -1, -1));
+
+        DescriptionLabel.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        DescriptionLabel.setText("jLabel17");
+        getContentPane().add(DescriptionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        jLabel4.setText("Name");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, -1, -1));
+
+        NameLabel.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        NameLabel.setText("jLabel13");
+        getContentPane().add(NameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        jLabel9.setText("Date");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, -1, -1));
+
+        DateLabel.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        DateLabel.setText("jLabel18");
+        getContentPane().add(DateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        jLabel5.setText("Category");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
+
+        CategoryLabel.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        CategoryLabel.setText("jLabel14");
+        getContentPane().add(CategoryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        jLabel6.setText("Type");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, -1, -1));
+
+        TypeLabel.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        TypeLabel.setText("jLabel15");
+        getContentPane().add(TypeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        jLabel11.setText("Time");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, -1, -1));
+
+        TimeLabel.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        TimeLabel.setText("jLabel19");
+        getContentPane().add(TimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        jLabel7.setText("Amount");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Helvetica", 1, 20)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Transaction Detail");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 190, -1));
+
+        AmountLabel.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        AmountLabel.setText("jLabel16");
+        getContentPane().add(AmountLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, -1, -1));
+
+        jButton6.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        jButton6.setText("Edit");
+        jButton6.setBorderPainted(false);
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 185, 180, 40));
-        jButton1.setOpaque(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setBorderPainted(false);
-
-        jButton2.setBackground(new java.awt.Color(252, 185, 83));
-        jButton2.setFont(new java.awt.Font("Helvetica", 1, 13)); // NOI18N
-        jButton2.setText("Transactions");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 180, 40));
-        jButton2.setOpaque(false);
-        jButton2.setContentAreaFilled(false);
-        jButton2.setBorderPainted(false);
-
-        jButton3.setBackground(new java.awt.Color(255, 171, 46));
-        jButton3.setFont(new java.awt.Font("Helvetica", 1, 13)); // NOI18N
-        jButton3.setText("Profile");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButton6ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 180, 35));
-        jButton3.setOpaque(false);
-        jButton3.setContentAreaFilled(false);
-        jButton3.setBorderPainted(false);
-
-        jButton4.setBackground(new java.awt.Color(255, 171, 46));
-        jButton4.setFont(new java.awt.Font("Helvetica", 1, 13)); // NOI18N
-        jButton4.setText("Logout");
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, 180, 50));
-        jButton4.setOpaque(false);
-        jButton4.setContentAreaFilled(false);
-        jButton4.setBorderPainted(false);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "ID", "Name", "Category", "Type", "Amount", "Description", "Date", "Time"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 70, 670, 430));
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 260, 40));
+        jButton6.setOpaque(false);
+        jButton6.setContentAreaFilled(false);
+        jButton6.setBorderPainted(false);
 
         jButton7.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
-        jButton7.setText("Remove Transaction");
+        jButton7.setText("Remove");
         jButton7.setBorderPainted(false);
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 510, 180, 47));
-        jButton7.setOpaque(false);
-        jButton7.setContentAreaFilled(false);
-        jButton7.setBorderPainted(false);
-
-        jButton8.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
-        jButton8.setText("Edit Transaction");
-        jButton8.setBorderPainted(false);
-        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton8MouseClicked(evt);
+                jButton7MouseClicked(evt);
             }
         });
-        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 510, -1, 47));
-        jButton8.setOpaque(false);
-        jButton8.setContentAreaFilled(false);
-        jButton8.setBorderPainted(false);
+        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 260, 40));
+        jButton6.setOpaque(false);
+        jButton6.setContentAreaFilled(false);
+        jButton6.setBorderPainted(false);
 
-        jLabel1.setFont(new java.awt.Font("Helvetica", 1, 24)); // NOI18N
-        jLabel1.setText("Hello, Rahaditya!");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
-
-        jLabel10.setFont(new java.awt.Font("Helvetica Rounded", 1, 20)); // NOI18N
-        jLabel10.setText("Duitly");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 70, -1));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon("/home/rahadityaputra/NetBeansProjects/duitly/JAR/TransactionDetail.png")); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Documents\\ngodong\\Pbo\\duitly\\JAR\\TransactionDetail.png")); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 500));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
-        // TODO add your handling code here:
-        new EditTransaksi(mainController);
+        new AddTransactionPage(mainController);
         this.dispose();
-    }//GEN-LAST:event_jButton8MouseClicked
+    }//GEN-LAST:event_jButton6MouseClicked
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_jButton7MouseClicked
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-//            logger.log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(() -> new Transaksi().setVisible(true));
-//    }
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(TransactionDetail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(TransactionDetail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(TransactionDetail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(TransactionDetail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the dialog */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                TransactionDetail dialog = new TransactionDetail(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel AmountLabel;
+    private javax.swing.JLabel CategoryLabel;
+    private javax.swing.JLabel DateLabel;
+    private javax.swing.JLabel DescriptionLabel;
+    private javax.swing.JLabel IdLabel;
+    private javax.swing.JLabel NameLabel;
+    private javax.swing.JLabel TimeLabel;
+    private javax.swing.JLabel TypeLabel;
+    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
 }
