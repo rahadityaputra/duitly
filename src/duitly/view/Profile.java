@@ -176,7 +176,7 @@ public class Profile extends javax.swing.JFrame {
         jLabel1.setText("Hello, Rahaditya!");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
 
-        jLabel9.setIcon(new javax.swing.ImageIcon("/home/rahadityaputra/NetBeansProjects/duitly/JAR/Profile.png")); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Documents\\ngodong\\Pbo\\duitly\\JAR\\Profile.png")); // NOI18N
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
 
         pack();

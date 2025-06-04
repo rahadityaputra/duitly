@@ -148,7 +148,7 @@ public class Register extends javax.swing.JFrame {
         jLabel10.setText("Duitly");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 70, -1));
 
-        jLabel9.setIcon(new javax.swing.ImageIcon("/home/rahadityaputra/NetBeansProjects/duitly/JAR/Login.png")); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Documents\\ngodong\\Pbo\\duitly\\JAR\\Login.png")); // NOI18N
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 600));
 
         pack();

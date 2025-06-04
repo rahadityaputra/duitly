@@ -90,7 +90,6 @@ public class EditTransactionPage extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jButton8 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jButton9 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -179,20 +178,6 @@ public class EditTransactionPage extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 150, 290, 110));
 
-        jButton8.setBackground(new java.awt.Color(255, 193, 7));
-        jButton8.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
-        jButton8.setText("Reset");
-        jButton8.setBorderPainted(false);
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 510, 110, 50));
-        jButton8.setOpaque(false);
-        jButton8.setContentAreaFilled(false);
-        jButton8.setBorderPainted(false);
-
         jLabel5.setFont(new java.awt.Font("Helvetica", 0, 16)); // NOI18N
         jLabel5.setText("Type");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, -1, -1));
@@ -278,7 +263,7 @@ public class EditTransactionPage extends javax.swing.JFrame {
         jLabel10.setText("Duitly");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 70, -1));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon("/home/rahadityaputra/NetBeansProjects/duitly/JAR/EditTransaksi.png")); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Documents\\ngodong\\Pbo\\duitly\\JAR\\EditTransaksi.png")); // NOI18N
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
 
         pack();
@@ -292,10 +277,6 @@ public class EditTransactionPage extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
         // TODO add your handling code here:
@@ -409,7 +390,6 @@ public class EditTransactionPage extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<Category> jComboBox2;

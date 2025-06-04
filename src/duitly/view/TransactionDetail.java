@@ -165,7 +165,7 @@ public class TransactionDetail extends javax.swing.JDialog {
         jButton6.setContentAreaFilled(false);
         jButton6.setBorderPainted(false);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("/home/rahadityaputra/NetBeansProjects/duitly/JAR/TransactionDetail.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Documents\\ngodong\\Pbo\\duitly\\JAR\\TransactionDetail.png")); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 500));
 
         pack();

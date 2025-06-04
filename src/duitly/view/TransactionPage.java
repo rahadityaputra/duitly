@@ -193,7 +193,7 @@ public class TransactionPage extends javax.swing.JFrame {
                 jButton6MouseClicked(evt);
             }
         });
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 510, 150, 47));
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 510, 670, 47));
         jButton6.setOpaque(false);
         jButton6.setContentAreaFilled(false);
         jButton6.setBorderPainted(false);
@@ -206,7 +206,7 @@ public class TransactionPage extends javax.swing.JFrame {
         jLabel10.setText("Duitly");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 70, -1));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("/home/rahadityaputra/NetBeansProjects/duitly/JAR/Transactions.png")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Documents\\ngodong\\Pbo\\duitly\\JAR\\Transactions.png")); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
 
         pack();

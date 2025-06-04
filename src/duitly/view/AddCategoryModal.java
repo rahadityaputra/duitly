@@ -98,7 +98,7 @@ public class AddCategoryModal extends javax.swing.JDialog {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Income", "Expense" }));
         getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, 250, 38));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon("/home/rahadityaputra/NetBeansProjects/duitly/JAR/Kategori.png")); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Documents\\ngodong\\Pbo\\duitly\\JAR\\Kategori.png")); // NOI18N
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 500));
 
         pack();
