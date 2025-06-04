@@ -7,6 +7,8 @@ package duitly.view;
 import duitly.controller.MainController;
 import duitly.model.Transaction;
 import duitly.model.User;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
@@ -57,7 +59,7 @@ public class TransactionPage extends javax.swing.JFrame {
             transaction.getCategoryName(),
             transaction.getType().toString(),
             transaction.getAmount().toString(),
-            transaction.getCreated_at(),
+            transaction.getDate(),
         });
         }
         
@@ -72,6 +74,17 @@ public class TransactionPage extends javax.swing.JFrame {
                         // Misalnya kolom 0 adalah ID transaksi
                         int id = (int) jTable1.getValueAt(row, 0);
                         System.out.println("Double-clicked row, ID: " + id);
+                        Transaction transaction = mainController.getDetailTransactionById(id);
+                        TransactionDetail transactionDetail = new TransactionDetail(TransactionPage.this, mainController, transaction);
+                        
+                        transactionDetail.addWindowListener(new WindowAdapter() {
+                            @Override
+                            public void windowClosed(WindowEvent e) {
+                                showTransactionTable(); // ini method kamu untuk update data kategori
+                            }
+                        });
+                        transactionDetail.setLocationRelativeTo(null);
+                        transactionDetail.setVisible(true);
 
                         // Bisa buka dialog edit, detail, dll.
                         // new TransactionDetailDialog(id).setVisible(true);

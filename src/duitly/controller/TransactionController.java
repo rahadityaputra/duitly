@@ -27,7 +27,9 @@ public class TransactionController {
     }
 
     public void updateTransaction(Transaction transaction) {
+        
         if (currentUser != null && transaction.getUserId() == currentUser.getId()) {
+            
             transactionDAO.updateTransaction(transaction);
         } else {
             throw new UserException("User not found");
@@ -35,7 +37,7 @@ public class TransactionController {
     }
 
     public void deleteTransaction(int transactionId) {
-        if (currentUser != null && transactionId == currentUser.getId()) {
+        if (currentUser != null) {
             transactionDAO.deleteTransaction(transactionId);
         } else {
             throw new UserException("User not found");

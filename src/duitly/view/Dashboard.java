@@ -8,6 +8,8 @@ import duitly.controller.MainController;
 import duitly.dto.DashboardSummary;
 import duitly.model.Transaction;
 import duitly.model.User;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
@@ -53,7 +55,12 @@ public class Dashboard extends javax.swing.JFrame {
     // untuk menampilkan table transaksi pada hari ini
     
     private void showTableTodayTransaction() {
-        DefaultTableModel model = new DefaultTableModel();
+        DefaultTableModel model = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // semua kolom tidak bisa diedit
+            }
+        };
         model.setColumnIdentifiers(new String[]{"ID", "Name", "Amount", "Type", "Time"});
 
         List<Transaction> todayTransactions = mainController.getTodayTransactions();
@@ -63,12 +70,41 @@ public class Dashboard extends javax.swing.JFrame {
             transaction.getCategoryName(),
             transaction.getAmount().toString(),
             transaction.getType().toString(),
-            transaction.getCreated_at().toLocalDateTime()
+            transaction.getTime()
         });
         
         }
         
         jTable1.setModel(model);
+        
+         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                if (evt.getClickCount() == 2) {
+                    int row = jTable1.rowAtPoint(evt.getPoint());
+                    if (row >= 0) {
+                        
+                        int id = (int) jTable1.getValueAt(row, 0);
+                        System.out.println("Double-clicked row, ID: " + id);
+                        Transaction transaction = mainController.getDetailTransactionById(id);
+                        TransactionDetail transactionDetail = new TransactionDetail(Dashboard.this, mainController, transaction);
+                        
+                        transactionDetail.addWindowListener(new WindowAdapter() {
+                            @Override
+                            public void windowClosed(WindowEvent e) {
+                                showTableTodayTransaction();
+                                showDashboardSummary();
+                            }
+                        });
+                        transactionDetail.setLocationRelativeTo(null);
+                        transactionDetail.setVisible(true);
+
+                        // Bisa buka dialog edit, detail, dll.
+                        // new TransactionDetailDialog(id).setVisible(true);
+                    }
+                }
+            }
+        });
     }
 
     /**

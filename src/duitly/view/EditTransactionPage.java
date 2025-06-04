@@ -7,8 +7,11 @@ package duitly.view;
 import duitly.controller.MainController;
 import duitly.model.Category;
 import duitly.model.Transaction;
+import duitly.model.TransactionType;
+import duitly.util.ErrorDialogSwing;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.JFrame;
 
@@ -39,10 +42,12 @@ public class EditTransactionPage extends javax.swing.JFrame {
         jTextField1.setText(transaction.getAmount().toString());
         jTextArea1.setText(transaction.getDescription());
         jComboBox1.setSelectedItem(transaction.getType().name());
+        System.out.println(transaction.getType().name());
         
         showCategoriesChoices();
         
-        jComboBox2.setSelectedItem(transaction.getCategoryName());
+       
+        System.out.println(transaction.getCategoryName());
     }
 
     public void showCategoriesChoices() {
@@ -50,13 +55,19 @@ public class EditTransactionPage extends javax.swing.JFrame {
 //         DefaultComboBoxModel<Category> model = new DefaultComboBoxModel<>();
          
          jComboBox2.removeAllItems();
-         String selectedType = (String) jComboBox1.getSelectedItem();
          for (Category category : categories) {
-             if (category.getType().name().equals(selectedType.toUpperCase())) {                 
+             if (category.getType().name().equals(transaction.getType().name())) {                 
                  jComboBox2.addItem(category);
              } 
          }
          
+         for (int i = 0; i < jComboBox2.getItemCount(); i++) {
+            Category item = jComboBox2.getItemAt(i);
+            if (item.getId() == transaction.getCategoryId()) {
+                jComboBox2.setSelectedIndex(i);
+                break;
+            }
+        }
          
      }
     /**
@@ -98,7 +109,7 @@ public class EditTransactionPage extends javax.swing.JFrame {
         getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, -1, -1));
 
         jComboBox1.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Income", "Expense" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "INCOME", "EXPENSE" }));
         jComboBox1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jComboBox1MouseClicked(evt);
@@ -288,7 +299,26 @@ public class EditTransactionPage extends javax.swing.JFrame {
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
         // TODO add your handling code here:
-        // tambah transaksi
+        // save transaksi yang sudah di edit
+         try {
+            String description = jTextArea1.getText();
+            String amountText = jTextField1.getText().trim();
+            BigDecimal amount = new BigDecimal(amountText);
+            String selectedType = (String) jComboBox1.getSelectedItem();
+            TransactionType type = TransactionType.valueOf(selectedType.toUpperCase());
+            Category selectedCategory = (Category) jComboBox2.getSelectedItem();
+            transaction.setDescription(description);
+            transaction.setAmouunt(amount);
+            transaction.setType(type);
+            transaction.setCategoryId(selectedCategory.getId());
+
+            mainController.updateTransaction(transaction);
+            new TransactionPage(mainController);
+            this.dispose();
+            
+        } catch (Exception e) {
+            ErrorDialogSwing.showError("Edit transaction Error", e.getLocalizedMessage());
+        }
         
         
     }//GEN-LAST:event_jButton6MouseClicked

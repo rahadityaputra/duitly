@@ -61,6 +61,10 @@ public class MainController {
     public User getCurrentUser() {
         return userController.getCurrentUser();
     }
+    
+    public Transaction getDetailTransactionById(int id) {
+        return transactionController.getTransactionById(id);
+    }
 
     public void addTransaction(Transaction transaction) {
         try {

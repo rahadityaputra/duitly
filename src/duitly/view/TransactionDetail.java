@@ -4,18 +4,42 @@
  */
 package duitly.view;
 
+import duitly.controller.MainController;
+import duitly.model.Transaction;
+import javax.swing.JFrame;
+
 /**
  *
  * @author User
  */
 public class TransactionDetail extends javax.swing.JDialog {
+    private final MainController mainController;
+    private final Transaction transaction;
+    private final JFrame parent;
 
     /**
      * Creates new form TransactionDetail
      */
-    public TransactionDetail(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public TransactionDetail(JFrame parent, MainController mainController, Transaction transaction) {
+        this.mainController = mainController;
+        this.transaction = transaction;
+        this.parent = parent;
+//        super(parent, modal);
         initComponents();
+        showTransactionData();
+    }
+    
+    private void showTransactionData() {
+        IdLabel.setText(String.valueOf(transaction.getId()));
+        CategoryLabel.setText(transaction.getCategoryName());
+        DescriptionLabel.setText(transaction.getDescription());
+        TypeLabel.setText(transaction.getType().name());
+        AmountLabel.setText(transaction.getAmount().toString());
+        DateLabel.setText(transaction.getDate());
+        TimeLabel.setText(transaction.getTime());
+        
+    
+       
     }
 
     /**
@@ -31,8 +55,6 @@ public class TransactionDetail extends javax.swing.JDialog {
         IdLabel = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         DescriptionLabel = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        NameLabel = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         DateLabel = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -67,45 +89,37 @@ public class TransactionDetail extends javax.swing.JDialog {
         DescriptionLabel.setText("jLabel17");
         getContentPane().add(DescriptionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
-        jLabel4.setText("Name");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, -1, -1));
-
-        NameLabel.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
-        NameLabel.setText("jLabel13");
-        getContentPane().add(NameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, -1, -1));
-
         jLabel9.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
         jLabel9.setText("Date");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, -1, -1));
 
         DateLabel.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         DateLabel.setText("jLabel18");
-        getContentPane().add(DateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, -1, -1));
+        getContentPane().add(DateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
         jLabel5.setText("Category");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
 
         CategoryLabel.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         CategoryLabel.setText("jLabel14");
-        getContentPane().add(CategoryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, -1));
+        getContentPane().add(CategoryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
         jLabel6.setText("Type");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, 40, -1));
 
         TypeLabel.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         TypeLabel.setText("jLabel15");
-        getContentPane().add(TypeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, -1, -1));
+        getContentPane().add(TypeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
         jLabel11.setText("Time");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, -1, -1));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, -1, -1));
 
         TimeLabel.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
         TimeLabel.setText("jLabel19");
-        getContentPane().add(TimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, -1, -1));
+        getContentPane().add(TimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
         jLabel7.setText("Amount");
@@ -151,7 +165,7 @@ public class TransactionDetail extends javax.swing.JDialog {
         jButton6.setContentAreaFilled(false);
         jButton6.setBorderPainted(false);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Documents\\ngodong\\Pbo\\duitly\\JAR\\TransactionDetail.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("/home/rahadityaputra/NetBeansProjects/duitly/JAR/TransactionDetail.png")); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 500));
 
         pack();
@@ -160,59 +174,23 @@ public class TransactionDetail extends javax.swing.JDialog {
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
         // TODO add your handling code here:
-        new AddTransactionPage(mainController);
-        this.dispose();
     }//GEN-LAST:event_jButton6MouseClicked
 
     private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
         // TODO add your handling code here:
+        mainController.deleteTransaction(transaction.getId());
+        dispose();
     }//GEN-LAST:event_jButton7MouseClicked
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+        new EditTransactionPage(mainController, transaction);
+        this.parent.dispose();
+        dispose();
+        
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TransactionDetail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TransactionDetail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TransactionDetail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TransactionDetail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                TransactionDetail dialog = new TransactionDetail(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AmountLabel;
@@ -220,7 +198,6 @@ public class TransactionDetail extends javax.swing.JDialog {
     private javax.swing.JLabel DateLabel;
     private javax.swing.JLabel DescriptionLabel;
     private javax.swing.JLabel IdLabel;
-    private javax.swing.JLabel NameLabel;
     private javax.swing.JLabel TimeLabel;
     private javax.swing.JLabel TypeLabel;
     private javax.swing.JButton jButton6;
@@ -229,7 +206,6 @@ public class TransactionDetail extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

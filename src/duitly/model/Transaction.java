@@ -2,7 +2,9 @@ package duitly.model;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.time.LocalDate;;
+import java.time.LocalDate;
+import java.time.LocalDateTime;import java.time.LocalTime;
+;
 
 public class Transaction {
     private int id;
@@ -11,7 +13,6 @@ public class Transaction {
     private BigDecimal amount;
     private String description;
     private String categoryName;
-    private LocalDate date;
     private Timestamp created_at;
     private int categoryId;
     
@@ -50,10 +51,6 @@ public int getId() {
         this.amount = amount;
     }
 
-    public LocalDate getDate() {
-        return this.date;
-    }
-
     public TransactionType getType() {
         return this.type;
     }
@@ -72,6 +69,21 @@ public int getId() {
 
     public Timestamp getCreated_at() {
         return created_at;
+    }
+    
+    public String getDate() {
+        LocalDateTime dateTime = created_at.toLocalDateTime();
+        LocalDate tanggal = dateTime.toLocalDate();
+        return tanggal.toString();
+    }
+    
+    public String getTime() {
+        LocalDateTime dateTime = created_at.toLocalDateTime();
+        LocalTime waktu = dateTime.toLocalTime();
+        int jam = waktu.getHour();
+        int menit = waktu.getMinute();
+        return jam + ":" + menit;
+        
     }
 
     public void setCreated_at(Timestamp created_at) {
