@@ -5,6 +5,7 @@
 package duitly.view;
 
 import duitly.controller.MainController;
+import duitly.exception.UserException;
 import duitly.util.ErrorDialogSwing;
 
 /**
@@ -187,20 +188,41 @@ public class Register extends javax.swing.JFrame {
         char[] passwordCharsConfirmation = jPasswordField2.getPassword();
         String passwordConfirmation = new String(passwordCharsConfirmation);
         
-        
-         if (password.equals(passwordConfirmation)) {
-             try {
-                MainController mainController = new MainController();
-                mainController.register(username, password, fullname, email);  
-                new Dashboard(mainController);
-                this.dispose();
-             } catch (Exception e) {
-                 ErrorDialogSwing.showError("Register Failed", e.getLocalizedMessage());
-             }
+        try {
+            if (username.isEmpty()) {
+                throw new UserException("Username cannot be empty. Please enter a username.");
+            }
+            if (fullname.isEmpty()) {
+                throw new UserException("Full name cannot be empty. Please enter your full name.");
+       
+            }
+            if (email.isEmpty()) {
+                throw new UserException("Email cannot be empty. Please enter your email address.");
+
+            }
+            if (password.isEmpty()) {
+                throw new UserException("Password cannot be empty. Please enter a password.");
+            }
+            if (passwordConfirmation.isEmpty()) {
+               throw new UserException("Please confirm your password.");
+                
+            }
             
-        } else {
-             ErrorDialogSwing.showError("Register Failed", "Passwords do not match. Please try again.");
+            if (!password.equals(passwordConfirmation)) {
+                throw new UserException("Passwords do not match. Please ensure both password fields are identical.");
+
+            } 
+
+            MainController mainController = new MainController();
+            mainController.register(username, password, fullname, email);  
+            new Dashboard(mainController);
+            this.dispose();
+            
+        } catch (Exception e) {
+            ErrorDialogSwing.showError("Register Failed", e.getLocalizedMessage());
         }
+        
+         
         
     }//GEN-LAST:event_jButton1MouseClicked
 

@@ -168,7 +168,9 @@ public class AddTransactionPage extends javax.swing.JFrame {
         jLabel5.setText("Type");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, -1, -1));
 
+        jButton9.setBackground(new java.awt.Color(204, 51, 255));
         jButton9.setFont(new java.awt.Font("Helvetica", 0, 14)); // NOI18N
+        jButton9.setForeground(new java.awt.Color(255, 255, 255));
         jButton9.setText("Add Category");
         jButton9.setBorderPainted(false);
         jButton9.addMouseListener(new java.awt.event.MouseAdapter() {
