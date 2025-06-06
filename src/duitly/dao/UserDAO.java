@@ -126,6 +126,22 @@ public class UserDAO {
         }
 
     }
+    public Boolean isUserValidated(String username, String password) {
+        String query = "SELECT 1 FROM users WHERE username = ? AND password = ? LIMIT 1";
+        try (
+                Connection conn = DBConnectionManager.Connect();
+                PreparedStatement pstmt = conn.prepareStatement(query);) {
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+            ResultSet result = pstmt.executeQuery();
+            return result.next();
+
+        } catch (SQLException e) {
+            System.err.println(e.getLocalizedMessage());
+            return false;
+        }
+    }
+    
 
     public Boolean checkUserExists(String username) {
         String query = "SELECT 1 FROM users WHERE username = ? LIMIT 1";

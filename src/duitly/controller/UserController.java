@@ -14,12 +14,18 @@ public class UserController {
 
     public void login(String username, String password) {
         try {
-            boolean isUserRegistered = userDAO.checkUserExists(username);
+            boolean isUserRegistered = userDAO.checkUserExists(username, password);
             if (isUserRegistered) {
-                System.out.println("Login successful!");
-                currentUser = userDAO.getUser(username);
+                boolean isUserValidated = userDAO.isUserValidated(username, password);
+                if (isUserValidated) {
+                    System.out.println("Login successful!");
+                    currentUser = userDAO.getUser(username);
+                } else {
+                    throw new UserException("Login failed: Incorrect password. Please try again.");
+                }
+                
             } else {
-                throw new RuntimeException("Login failed: User not found.");
+                throw new UserException("Login failed: User not found.");
             }
         } catch (RuntimeException e) {
             throw e;

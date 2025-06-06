@@ -34,7 +34,7 @@ public class TransactionDetail extends javax.swing.JDialog {
         CategoryLabel.setText(transaction.getCategoryName());
         DescriptionLabel.setText(transaction.getDescription());
         TypeLabel.setText(transaction.getType().name());
-        AmountLabel.setText(transaction.getAmount().toString());
+        AmountLabel.setText("Rp. " + transaction.getAmount().toString());
         DateLabel.setText(transaction.getDate());
         TimeLabel.setText(transaction.getTime());
         

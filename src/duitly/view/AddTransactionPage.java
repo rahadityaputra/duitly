@@ -5,6 +5,7 @@
 package duitly.view;
 
 import duitly.controller.MainController;
+import duitly.exception.TransactionException;
 import duitly.model.Category;
 import duitly.model.Transaction;
 import duitly.model.TransactionType;
@@ -332,8 +333,10 @@ public class AddTransactionPage extends javax.swing.JFrame {
             new TransactionPage(mainController);
             this.dispose();
             
-        } catch (Exception e) {
+        } catch (TransactionException e) {
             ErrorDialogSwing.showError("Add transaction Error", e.getLocalizedMessage());
+        } catch (NumberFormatException e) {
+            ErrorDialogSwing.showError("Add Transaction Error", "Amount must be a number.");
         }
         
         

@@ -5,6 +5,7 @@
 package duitly.view;
 
 import duitly.controller.MainController;
+import duitly.exception.UserException;
 import duitly.util.ErrorDialogSwing;
 import javax.swing.JFrame;
 
@@ -142,6 +143,10 @@ public class Login extends javax.swing.JFrame {
       String username = jTextField3.getText();
       char[] passwordChars = jPasswordField1.getPassword();
       String password = new String(passwordChars);
+      if (username.isEmpty() && password.isEmpty()) {
+            // Both are empty
+            throw new UserException("Username and password cannot be empty. Please fill them in.");
+      }
       MainController mainController = new MainController();
       mainController.login(username, password);
       new Dashboard(mainController);
