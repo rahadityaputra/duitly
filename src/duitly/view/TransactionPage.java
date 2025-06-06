@@ -171,6 +171,11 @@ public class TransactionPage extends javax.swing.JFrame {
         jButton4.setBackground(new java.awt.Color(255, 171, 46));
         jButton4.setFont(new java.awt.Font("Helvetica", 1, 13)); // NOI18N
         jButton4.setText("Logout");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
         getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, 180, 50));
         jButton4.setOpaque(false);
         jButton4.setContentAreaFilled(false);
@@ -212,8 +217,6 @@ public class TransactionPage extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Helvetica Rounded", 1, 20)); // NOI18N
         jLabel10.setText("Duitly");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 70, -1));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon("/home/rahadityaputra/NetBeansProjects/duitly/JAR/Transactions.png")); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
 
         pack();
@@ -245,6 +248,12 @@ public class TransactionPage extends javax.swing.JFrame {
         new Profile(mainController);
         this.dispose();
     }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        // TODO add your handling code here:
+        new Login();
+        this.dispose();
+    }//GEN-LAST:event_jButton4MouseClicked
 
  
 
