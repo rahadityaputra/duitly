@@ -7,14 +7,29 @@ package duitly.view;
 import duitly.controller.MainController;
 import duitly.dto.DashboardSummary;
 import duitly.model.Transaction;
+import duitly.model.TransactionType;
 import duitly.model.User;
 import duitly.util.ErrorDialogSwing;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
-
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+import org.jfree.chart.plot.PieLabelLinkStyle;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.data.general.DefaultPieDataset;
 /**
  *
  * @author arkankhalifamusta
@@ -33,11 +48,63 @@ public class Dashboard extends javax.swing.JFrame {
         showDashboardSummary();
         showTableTodayTransaction();
         setExtendedState(JFrame.MAXIMIZED_HORIZ);
+        showPieChart(mainController);
         setVisible(true);
         setResizable(false);
     }
     
-    
+    public void showPieChart(MainController mainController) {
+    // 1. Get all transactions
+    List<Transaction> transactions = mainController.getAllTransactions();
+
+    // 2. Group total amount by transaction type
+    Map<TransactionType, BigDecimal> typeTotals = new HashMap<>();
+
+    for (Transaction transaction : transactions) {
+        TransactionType type = transaction.getType();
+        BigDecimal amount = transaction.getAmount();
+
+        typeTotals.put(type,
+            typeTotals.getOrDefault(type, BigDecimal.ZERO).add(amount));
+    }
+
+    // 3. Populate the dataset using TransactionType (e.g., INCOME, EXPENSE)
+    DefaultPieDataset dataset = new DefaultPieDataset();
+    for (Map.Entry<TransactionType, BigDecimal> entry : typeTotals.entrySet()) {
+        dataset.setValue(entry.getKey().toString(), entry.getValue());
+    }
+
+    // 4. Create the chart
+    JFreeChart pieChart = ChartFactory.createPieChart("Cashflow", dataset,true,true,        false);
+    pieChart.setBackgroundPaint(new Color(244,246,248));
+    pieChart.getTitle().setFont(new Font("Helvetica", Font.BOLD, 18));
+
+    // 5. Customize the plot
+    PiePlot plot = (PiePlot) pieChart.getPlot();
+    plot.setBackgroundPaint(Color.WHITE);
+
+    // Show percentage with category
+    plot.setLabelGenerator(new StandardPieSectionLabelGenerator(
+        "{0}: {1} ({2})", new DecimalFormat("0.00"), new DecimalFormat("0%")));
+
+    plot.setLabelLinkStyle(PieLabelLinkStyle.CUBIC_CURVE);
+    plot.setLabelLinkMargin(0.05);
+    plot.setLabelGap(0.01);
+    plot.setLabelBackgroundPaint(new Color(244,246,248));
+    plot.setLabelOutlinePaint(null);
+    plot.setLabelShadowPaint(null);
+    plot.setStartAngle(360);
+
+    // 6. Display chart in panel
+    ChartPanel chartPanel = new ChartPanel(pieChart);
+    jPanel1.removeAll();
+    jPanel1.setPreferredSize(new Dimension(500, 400));
+    jPanel1.setLayout(new BorderLayout());
+    jPanel1.add(chartPanel, BorderLayout.CENTER);
+    jPanel1.validate();
+    jPanel1.repaint();
+}
+
     // untuk ucapan halo ke user
     private void sayHello() {
         User user = mainController.getCurrentUser();
@@ -54,8 +121,6 @@ public class Dashboard extends javax.swing.JFrame {
         } catch (Exception e) {
             ErrorDialogSwing.showError("Show Dashboard Error", e.getLocalizedMessage());
         }
-        
-        
     }
     
     // untuk menampilkan table transaksi pada hari ini
@@ -135,6 +200,7 @@ public class Dashboard extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -159,7 +225,7 @@ public class Dashboard extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, 670, 380));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, 330, 380));
 
         jButton4.setBackground(new java.awt.Color(255, 171, 46));
         jButton4.setFont(new java.awt.Font("Helvetica", 1, 13)); // NOI18N
@@ -226,9 +292,13 @@ public class Dashboard extends javax.swing.JFrame {
         jButton3.setContentAreaFilled(false);
         jButton3.setBorderPainted(false);
 
+        jPanel1.setBackground(new java.awt.Color(244, 246, 248));
+        jPanel1.setForeground(new java.awt.Color(233, 238, 238));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 160, 330, 400));
+
         jLabel1.setFont(new java.awt.Font("Helvetica", 1, 24)); // NOI18N
-        jLabel1.setText("Hello, Rahaditya!");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+        jLabel1.setText("Hello");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 220, -1));
 
         jLabel2.setFont(new java.awt.Font("Helvetica", 1, 18)); // NOI18N
         jLabel2.setText("This Month's Income");
@@ -243,22 +313,22 @@ public class Dashboard extends javax.swing.JFrame {
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 150, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Helvetica", 0, 18)); // NOI18N
-        jLabel6.setText("Rp --,");
+        jLabel6.setText("Rp");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, 179, -1));
 
         jLabel7.setFont(new java.awt.Font("Helvetica", 0, 18)); // NOI18N
-        jLabel7.setText("Rp --,");
+        jLabel7.setText("Rp");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 100, 189, 20));
 
         jLabel8.setFont(new java.awt.Font("Helvetica", 0, 18)); // NOI18N
-        jLabel8.setText("Rp --,");
+        jLabel8.setText("Rp");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 100, 189, -1));
 
         jLabel10.setFont(new java.awt.Font("Helvetica Rounded", 1, 20)); // NOI18N
         jLabel10.setText("Duitly");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 70, -1));
 
-        BackgroundImg.setIcon(new javax.swing.ImageIcon("/home/rahadityaputra/NetBeansProjects/duitly/JAR/Dashboard.png")); // NOI18N
+        BackgroundImg.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Documents\\ngodong\\Pbo\\duitly\\JAR\\Dashboard.png")); // NOI18N
         getContentPane().add(BackgroundImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
 
         pack();
@@ -307,6 +377,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
