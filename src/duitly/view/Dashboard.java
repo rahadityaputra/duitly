@@ -8,6 +8,7 @@ import duitly.controller.MainController;
 import duitly.dto.DashboardSummary;
 import duitly.model.Transaction;
 import duitly.model.User;
+import duitly.util.ErrorDialogSwing;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.List;
@@ -45,10 +46,15 @@ public class Dashboard extends javax.swing.JFrame {
 
     // untuk menampilkan data summay transaksi milik user    
     private void showDashboardSummary() {
-        DashboardSummary dashboardSummary = mainController.getDashboardSummary();
-        jLabel6.setText("Rp. " + dashboardSummary.getIncome());
-        jLabel7.setText("Rp. " + dashboardSummary.getExpense());
-        jLabel8.setText("Rp. " + dashboardSummary.getBalance());
+        try {
+            DashboardSummary dashboardSummary = mainController.getDashboardSummary();
+            jLabel6.setText("Rp. " + dashboardSummary.getIncome());
+            jLabel7.setText("Rp. " + dashboardSummary.getExpense());
+            jLabel8.setText("Rp. " + dashboardSummary.getBalance());
+        } catch (Exception e) {
+            ErrorDialogSwing.showError("Show Dashboard Error", e.getLocalizedMessage());
+        }
+        
         
     }
     
@@ -62,8 +68,10 @@ public class Dashboard extends javax.swing.JFrame {
             }
         };
         model.setColumnIdentifiers(new String[]{"ID", "Name", "Amount", "Type", "Time"});
-
-        List<Transaction> todayTransactions = mainController.getTodayTransactions();
+        
+        
+        try {
+              List<Transaction> todayTransactions = mainController.getTodayTransactions();
         for (Transaction transaction : todayTransactions) {
         model.addRow(new Object[]{
             transaction.getId(),
@@ -105,6 +113,10 @@ public class Dashboard extends javax.swing.JFrame {
                 }
             }
         });
+        } catch (Exception e) {
+            ErrorDialogSwing.showError("Can not show transactions today", e.getLocalizedMessage());
+        }
+      
     }
 
     /**
@@ -246,7 +258,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel10.setText("Duitly");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 70, -1));
 
-        BackgroundImg.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Documents\\ngodong\\Pbo\\duitly\\JAR\\Dashboard.png")); // NOI18N
+        BackgroundImg.setIcon(new javax.swing.ImageIcon("/home/rahadityaputra/NetBeansProjects/duitly/JAR/Dashboard.png")); // NOI18N
         getContentPane().add(BackgroundImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
 
         pack();

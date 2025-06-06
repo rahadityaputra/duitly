@@ -54,7 +54,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="100" y="400" width="400" height="38"/>
+          <AbsoluteConstraints x="100" y="490" width="400" height="38"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -171,7 +171,7 @@
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\User\Documents\ngodong\Pbo\duitly\JAR\Login2.png"/>
+          <Image iconType="2" name="/home/rahadityaputra/NetBeansProjects/duitly/JAR/Login.png"/>
         </Property>
       </Properties>
       <Constraints>

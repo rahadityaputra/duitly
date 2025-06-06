@@ -153,19 +153,21 @@ public class TransactionDetail extends javax.swing.JDialog {
         jButton6.setBorderPainted(false);
 
         jButton7.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(255, 255, 255));
         jButton7.setText("Remove");
         jButton7.setBorderPainted(false);
+        jButton7.setOpaque(false);
         jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton7MouseClicked(evt);
             }
         });
-        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 260, 40));
-        jButton6.setOpaque(false);
-        jButton6.setContentAreaFilled(false);
-        jButton6.setBorderPainted(false);
+        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, 240, 30));
+        jButton7.setOpaque(false);
+        jButton7.setContentAreaFilled(false);
+        jButton7.setBorderPainted(false);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Documents\\ngodong\\Pbo\\duitly\\JAR\\TransactionDetail.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("/home/rahadityaputra/NetBeansProjects/duitly/JAR/TransactionDetail.png")); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 500));
 
         pack();

@@ -110,6 +110,7 @@ public class AddTransactionPage extends javax.swing.JFrame {
 
         jButton7.setBackground(new java.awt.Color(220, 53, 69));
         jButton7.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(255, 255, 255));
         jButton7.setText("Cancel");
         jButton7.setBorderPainted(false);
         jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -143,6 +144,7 @@ public class AddTransactionPage extends javax.swing.JFrame {
 
         jButton6.setBackground(new java.awt.Color(25, 135, 84));
         jButton6.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(255, 255, 255));
         jButton6.setText("Save");
         jButton6.setBorderPainted(false);
         jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -247,7 +249,7 @@ public class AddTransactionPage extends javax.swing.JFrame {
         jLabel10.setText("Duitly");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 70, -1));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Documents\\ngodong\\Pbo\\duitly\\JAR\\EditTransaksi.png")); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon("/home/rahadityaputra/NetBeansProjects/duitly/JAR/EditTransaksi.png")); // NOI18N
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
 
         pack();

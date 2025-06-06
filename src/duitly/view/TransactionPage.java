@@ -7,6 +7,7 @@ package duitly.view;
 import duitly.controller.MainController;
 import duitly.model.Transaction;
 import duitly.model.User;
+import duitly.util.ErrorDialogSwing;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.List;
@@ -42,56 +43,61 @@ public class TransactionPage extends javax.swing.JFrame {
     }
     
     private void showTransactionTable() {
-        List<Transaction> transactions = mainController.getAllTransactions();
-        DefaultTableModel model = new DefaultTableModel() {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false; // semua kolom tidak bisa diedit
-            }
-        };
-        
-        
-        
-        model.setColumnIdentifiers(new String[]{"ID", "Category" ,"Type", "Amount", "Date"});
-        for (Transaction transaction : transactions) {
-        model.addRow(new Object[]{
-            transaction.getId(),
-            transaction.getCategoryName(),
-            transaction.getType().toString(),
-            transaction.getAmount().toString(),
-            transaction.getDate(),
-        });
-        }
-        
-        jTable1.setModel(model);
-        
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                if (evt.getClickCount() == 2) {
-                    int row = jTable1.rowAtPoint(evt.getPoint());
-                    if (row >= 0) {
-                        // Misalnya kolom 0 adalah ID transaksi
-                        int id = (int) jTable1.getValueAt(row, 0);
-                        System.out.println("Double-clicked row, ID: " + id);
-                        Transaction transaction = mainController.getDetailTransactionById(id);
-                        TransactionDetail transactionDetail = new TransactionDetail(TransactionPage.this, mainController, transaction);
-                        
-                        transactionDetail.addWindowListener(new WindowAdapter() {
-                            @Override
-                            public void windowClosed(WindowEvent e) {
-                                showTransactionTable(); // ini method kamu untuk update data kategori
-                            }
-                        });
-                        transactionDetail.setLocationRelativeTo(null);
-                        transactionDetail.setVisible(true);
+        try {
+            List<Transaction> transactions = mainController.getAllTransactions();
+            DefaultTableModel model = new DefaultTableModel() {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false; // semua kolom tidak bisa diedit
+                }
+            };
 
-                        // Bisa buka dialog edit, detail, dll.
-                        // new TransactionDetailDialog(id).setVisible(true);
+
+
+            model.setColumnIdentifiers(new String[]{"ID", "Category" ,"Type", "Amount", "Date"});
+            for (Transaction transaction : transactions) {
+            model.addRow(new Object[]{
+                transaction.getId(),
+                transaction.getCategoryName(),
+                transaction.getType().toString(),
+                transaction.getAmount().toString(),
+                transaction.getDate(),
+            });
+            }
+
+            jTable1.setModel(model);
+
+            jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+                @Override
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    if (evt.getClickCount() == 2) {
+                        int row = jTable1.rowAtPoint(evt.getPoint());
+                        if (row >= 0) {
+                            // Misalnya kolom 0 adalah ID transaksi
+                            int id = (int) jTable1.getValueAt(row, 0);
+                            System.out.println("Double-clicked row, ID: " + id);
+                            Transaction transaction = mainController.getDetailTransactionById(id);
+                            TransactionDetail transactionDetail = new TransactionDetail(TransactionPage.this, mainController, transaction);
+
+                            transactionDetail.addWindowListener(new WindowAdapter() {
+                                @Override
+                                public void windowClosed(WindowEvent e) {
+                                    showTransactionTable(); // ini method kamu untuk update data kategori
+                                }
+                            });
+                            transactionDetail.setLocationRelativeTo(null);
+                            transactionDetail.setVisible(true);
+
+                            // Bisa buka dialog edit, detail, dll.
+                            // new TransactionDetailDialog(id).setVisible(true);
+                        }
                     }
                 }
-            }
-        });
+            });
+        } catch (Exception e) {
+            ErrorDialogSwing.showError("Can not show detail transaction", e.getLocalizedMessage());
+        }
+        
     }
 
     /**
@@ -186,6 +192,7 @@ public class TransactionPage extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 70, 670, 430));
 
         jButton6.setFont(new java.awt.Font("Helvetica", 1, 14)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(255, 255, 255));
         jButton6.setText("Add Transaction");
         jButton6.setBorderPainted(false);
         jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -206,7 +213,7 @@ public class TransactionPage extends javax.swing.JFrame {
         jLabel10.setText("Duitly");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 70, -1));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Documents\\ngodong\\Pbo\\duitly\\JAR\\Transactions.png")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("/home/rahadityaputra/NetBeansProjects/duitly/JAR/Transactions.png")); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
 
         pack();
